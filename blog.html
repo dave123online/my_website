@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — Digital Neighbor</title>
+  <meta name="description" content="Conseils, guides et astuces pour digitaliser votre business local. Par Digital Neighbor."/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FFFBF5;
+      --bg2: #FFF8EE;
+      --amber: #F59E0B;
+      --amber-dark: #D97706;
+      --orange: #EA580C;
+      --text: #1C1917;
+      --text-muted: #78716C;
+      --border: rgba(245, 158, 11, 0.15);
+      --shadow: 0 4px 20px rgba(245, 158, 11, 0.08);
+      --icon-stroke: 1.6;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1C1917;
+      --bg2: #292524;
+      --text: #FFFBF5;
+      --text-muted: #A8A29E;
+      --border: rgba(245, 158, 11, 0.2);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: var(--icon-stroke);
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .icon-sm { width: 18px; height: 18px; }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 6vw;
+      background: rgba(255, 251, 245, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+    [data-theme="dark"] nav { background: rgba(28, 25, 23, 0.9); }
+
+    .nav-logo {
+      text-decoration: none;
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .nav-logo span { color: var(--amber); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber); }
+
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--amber); }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* HEADER */
+    .blog-header {
+      padding: 140px 6vw 60px;
+      text-align: center;
+      background: var(--bg2);
+    }
+    .blog-header .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .blog-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .blog-header p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ARTICLE */
+    article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 6vw;
+    }
+    article + article {
+      border-top: 1px solid var(--border);
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    .meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    article h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    article h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 32px 0 12px;
+    }
+
+    article p {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    article ul {
+      margin: 16px 0 24px 24px;
+    }
+    article li {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    article li::marker {
+      color: var(--amber);
+    }
+
+    article strong {
+      color: var(--amber);
+      font-weight: 600;
+    }
+
+    .article-cta {
+      margin-top: 40px;
+      padding: 32px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-align: center;
+    }
+    .article-cta h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .article-cta p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .article-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--amber);
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .article-cta a:hover {
+      background: var(--amber-dark);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 6vw;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .footer-brand span { color: var(--amber); }
+    footer p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">Digital <span>Neighbor</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#testimonials">Avis</a></li>
+    <li><a href="index.html#faq">FAQ</a></li>
+  </ul>
+  <a class="nav-back" href="index.html#blog">
+    <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Retour au site
+  </a>
+</nav>
+
+<!-- HEADER -->
+<div class="blog-header">
+  <div class="label">Blog & Ressources</div>
+  <h1>Articles & Guides</h1>
+  <p>Conseils pratiques pour digitaliser votre business et vendre plus sur les réseaux.</p>
+</div>
+
+<!-- ARTICLE 1 -->
+<article id="article-1">
+  <div class="article-meta">
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      15 Juin 2026
+    </span>
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      5 min de lecture
+    </span>
+  </div>
+
+  <h2>5 erreurs qui tuent vos ventes sur Instagram</h2>
+
+  <p>Vous postez régulièrement, vous avez des likes, mais <strong>peu de ventes concrètes</strong> ? Vous n'êtes pas seul. La majorité des vendeurs sur Instagram font les mêmes erreurs qui freinent leurs conversions.</p>
+
+  <h3>Erreur n°1 : Pas de lien cliquable dans la bio</h3>
+  <p>C'est la base, et pourtant. Si votre bio Instagram ne contient qu'un numéro de téléphone ou rien du tout, vous perdez 80% des acheteurs potentiels. <strong>Un lien vers un catalogue digital</strong> permet au client de voir vos produits, prix et disponibilités à tout moment, sans attendre votre réponse.</p>
+
+  <h3>Erreur n°2 : Répondre aux prix en DM uniquement</h3>
+  <p>Combien de fois par jour répétez-vous le même prix ? Chaque "c'est combien ?" est une friction. Le client qui doit attendre votre réponse pour savoir si un article est disponible <strong>part souvent chez un concurrent</strong> qui affiche ses prix clairement.</p>
+
+  <h3>Erreur n°3 : Des photos floues ou mal éclairées</h3>
+  <p>Sur Instagram, la photo EST votre vitrine. Pas besoin d'un appareil pro : un smartphone, une lumière naturelle et un fond propre suffisent. <strong>La qualité visuelle = la crédibilité perçue.</strong></p>
+
+  <h3>Erreur n°4 : Pas de preuve sociale</h3>
+  <p>Avis clients, captures de commandes, témoignages en story... Tout ça construit la confiance. Un nouveau client qui voit que d'autres ont déjà acheté <strong>est 5x plus susceptible d'acheter</strong>.</p>
+
+  <h3>Erreur n°5 : Ne pas relancer les paniers abandonnés</h3>
+  <p>Un client qui ajoute au panier mais ne finalise pas ? C'est normal, la vie passe. <strong>Une relance automatique 2h après</strong> récupère en moyenne 30% des ventes perdues.</p>
+
+  <div class="article-cta">
+    <h4>Envie de corriger tout ça ?</h4>
+    <p>On construit pour vous un catalogue digital qui résout ces 5 problèmes en une seule solution.</p>
+    <a href="https://wa.me/message/5T343GB4HXLRH1" target="_blank">
+      Discutons-en sur WhatsApp
+      <svg class="icon icon-sm" viewBox="0 0 24 24" style="color:white"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</article>
+
+<!-- ARTICLE 2 -->
+<article id="article-2">
+  <div class="article-meta">
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      8 Juin 2026
+    </span>
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      7 min de lecture
+    </span>
+  </div>
+
+  <h2>L'IA pour les petites entreprises : par où commencer ?</h2>
+
+  <p>L'intelligence artificielle n'est plus réservée aux grandes boîtes. Aujourd'hui, <strong>un petit vendeur de sneakers peut utiliser l'IA</strong> pour automatiser des tâches qui lui prenaient des heures. Voici comment s'y mettre sans se ruiner.</p>
+
+  <h3>1. Le chatbot SAV (le plus simple)</h3>
+  <p>Un chatbot connecté à WhatsApp ou Instagram qui répond <strong>automatiquement aux questions fréquentes</strong> : "C'est combien ?", "Vous avez du 42 ?", "Quels sont les délais de livraison ?". Résultat : vous dormez, le bot vend.</p>
+  <p>Coût : entre 30 000 et 80 000 FCFA selon la complexité. ROI en moins de 2 mois.</p>
+
+  <h3>2. La génération de contenu automatique</h3>
+  <p>Vous ajoutez un produit à votre catalogue ? L'IA peut <strong>générer instantanément</strong> la description, les hashtags, et même le visuel pour Instagram. Fini les heures passées à rédiger des posts.</p>
+
+  <h3>3. La relance automatique des paniers abandonnés</h3>
+  <p>Un client a ajouté au panier mais n'a pas commandé ? Un message automatique personnalisé peut <strong>récupérer 30% des ventes perdues</strong>. C'est de l'argent qui dort, littéralement.</p>
+
+  <h3>Par quoi commencer ?</h3>
+  <p>Si vous devez choisir UNE seule chose, commencez par <strong>le chatbot SAV</strong>. C'est le plus simple à mettre en place, le moins cher, et le retour sur investissement est immédiat. Vous libérez des heures chaque semaine.</p>
+
+  <div class="article-cta">
+    <h4>Envie d'essayer l'IA sur votre business ?</h4>
+    <p>On vous montre en 30 minutes ce qui est possible pour VOUS, concrètement.</p>
+    <a href="https://wa.me/message/5T343GB4HXLRH1" target="_blank">
+      Réserver une démo gratuite
+      <svg class="icon icon-sm" viewBox="0 0 24 24" style="color:white"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</article>
+
+<!-- ARTICLE 3 -->
+<article id="article-3">
+  <div class="article-meta">
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      1 Juin 2026
+    </span>
+    <span class="meta-item">
+      <svg class="icon icon-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      6 min de lecture
+    </span>
+  </div>
+
+  <h2>Site vitrine vs catalogue : lequel choisir ?</h2>
+
+  <p>Vous hésitez entre un simple site vitrine et un catalogue automatisé ? <strong>Le choix dépend de votre activité</strong>. Voici un guide pour ne pas vous tromper.</p>
+
+  <h3>Le site vitrine : pour qui ?</h3>
+  <p>Un site vitrine est parfait si vous êtes :</p>
+  <ul>
+    <li><strong>Freelance</strong> (graphiste, développeur, consultant)</li>
+    <li><strong>Artisan</strong> (couturier, menuisier, coiffeur)</li>
+    <li><strong>Professionnel libéral</strong> (avocat, comptable, coach)</li>
+  </ul>
+  <p>Objectif : <strong>présenter votre travail, inspirer confiance, et être contacté</strong>. Pas besoin de panier, juste un formulaire ou un bouton WhatsApp.</p>
+  <p>Prix : à partir de 59 900 FCFA.</p>
+
+  <h3>Le catalogue automatisé : pour qui ?</h3>
+  <p>Un catalogue est indispensable si vous :</p>
+  <ul>
+    <li><strong>Vendez des produits physiques</strong> (vêtements, sneakers, cosmétiques)</li>
+    <li><strong>Proposez des abonnements</strong> (salle de sport, coaching)</li>
+    <li><strong>Avez plusieurs variantes</strong> (tailles, couleurs, forfaits)</li>
+  </ul>
+  <p>Objectif : <strong>vendre 24h/24 sans être derrière l'écran</strong>. Le client choisit, commande, et vous recevez la commande prête sur WhatsApp.</p>
+  <p>Prix : à partir de 124 900 FCFA.</p>
+
+  <h3>Le tableau comparatif rapide</h3>
+  <ul>
+    <li><strong>Site vitrine</strong> : 1-2 semaines de développement, idéal pour la crédibilité</li>
+    <li><strong>Catalogue</strong> : 2-3 semaines, idéal pour générer des ventes automatiques</li>
+    <li><strong>Les deux</strong> : beaucoup de clients commencent par un vitrine puis évoluent vers un catalogue</li>
+  </ul>
+
+  <h3>Notre conseil</h3>
+  <p>Si vous vendez déjà sur Instagram et que vous passez <strong>plus de 2h par jour à répondre aux DM</strong>, le catalogue est un investissement qui se rentabilise en quelques semaines. Si vous êtes en phase de lancement et que vous avez besoin de crédibilité, commencez par le vitrine.</p>
+
+  <div class="article-cta">
+    <h4>Besoin d'aide pour choisir ?</h4>
+    <p>On en discute 15 minutes, on vous dit honnêtement ce qui est le mieux pour votre cas.</p>
+    <a href="https://wa.me/message/5T343GB4HXLRH1" target="_blank">
+      Avoir un conseil gratuit
+      <svg class="icon icon-sm" viewBox="0 0 24 24" style="color:white"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Digital <span>Neighbor</span></div>
+  <p>© 2026 Digital Neighbor — Transformation digitale locale</p>
+</footer>
+
+<script>
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', savedTheme);
+</script>
+
+</body>
+</html>
+

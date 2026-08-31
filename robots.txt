@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://digital-neighbor.com/sitemap.xml

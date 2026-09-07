@@ -7,8 +7,7 @@
 
 <!-- SEO Primary -->
 <title>Digital Neighbor — Création de sites web & Référencement Google pour PME</title>
-<meta name="description" content="Digital Neighbor crée votre site web, optimise votre référencement Google et configure votre fiche Google Business. Visibilité locale garantie pour les PME."/>
-<meta name="keywords" content="création site web, référencement Google, SEO local, fiche Google Business, site vitrine, catalogue en ligne, digitalisation PME"/>
+<meta name="description" content="Digital Neighbor crée votre site web, optimise votre référencement Google et configure votre fiche Google Business. Basé au Bénin, accompagnement des PME locales et francophones. Visibilité garantie."/>
 <meta name="author" content="Digital Neighbor"/>
 <link rel="canonical" href="https://digitalneighbor.netlify.app/"/>
 
@@ -20,10 +19,10 @@
 <meta property="og:locale" content="fr_FR"/>
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image"/>
-<meta property="twitter:url" content="https://digitalneighbor.netlify.app/"/>
-<meta property="twitter:title" content="Digital Neighbor — Création de sites web & Référencement Google"/>
-<meta property="twitter:description" content="Site web sur-mesure, fiche Google optimisée et indexation garantie."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:url" content="https://digitalneighbor.netlify.app/"/>
+<meta name="twitter:title" content="Digital Neighbor — Création de sites web & Référencement Google"/>
+<meta name="twitter:description" content="Site web sur-mesure, fiche Google optimisée et indexation garantie."/>
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏘️</text></svg>"/>
@@ -42,18 +41,25 @@
       "@type": ["ProfessionalService", "LocalBusiness"],
       "@id": "https://digitalneighbor.netlify.app/#organization",
       "name": "Digital Neighbor",
-      "description": "Accompagnateur de croissance locale : création de sites web, référencement Google et optimisation de fiche Google Business pour les PME.",
+      "description": "Accompagnateur de croissance locale : création de sites web, référencement Google et optimisation de fiche Google Business pour les PME. Basé au Bénin, intervention locale et à distance en francophonie.",
       "url": "https://digitalneighbor.netlify.app/",
       "email": "digitalneighbor@outlook.com",
       "priceRange": "€€",
-      "areaServed": { "@type": "Country", "name": "France" },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "BJ"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Bénin" },
+        { "@type": "Place", "name": "International francophone (à distance)" }
+      ],
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Services Digital Neighbor",
         "itemListElement": [
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Optimisation de site existant et SEO" }},
           { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Création de site vitrine ou catalogue" }},
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Domination Google : fiche Google Business + stratégie locale" }}
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Visibilité locale : fiche Google Business + stratégie locale" }}
         ]
       }
     },
@@ -61,9 +67,15 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Combien coûte une prestation ?",
-          "acceptedAnswer": { "@type": "Answer", "text": "En tant que consultant, je m'adapte à la réalité de chaque PME. Il n'y a pas de tarifs fixes. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible." }},
+          "acceptedAnswer": { "@type": "Answer", "text": "Les tarifs commencent à partir de 120000 XOF pour une optimisation de site existant, 60000 XOF pour la visibilité locale et 250000 XOF pour une création complète. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible." }},
         { "@type": "Question", "name": "C'est quoi votre garantie exactement ?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Je m'engage sur deux résultats : l'indexation de votre site sur Google et la visibilité de votre fiche Google Business. Si l'un des deux n'est pas atteint, la partie correspondante est remboursée." }},
+          "acceptedAnswer": { "@type": "Answer", "text": "Je m'engage sur deux résultats mesurables sous 30 jours : l'indexation de votre site sur Google (vérifiable via la commande site:votresite.com) et la visibilité de votre fiche Google Business dans le Pack Local. Avant de commencer, nous validons ensemble les mots-clés cibles, la zone géographique et la recherche locale de référence : c'est cette liste convenue qui sert de mesure à J+30. Si l'un des deux résultats n'est pas atteint, la partie correspondante est remboursée." }},
+        { "@type": "Question", "name": "Vous travaillez uniquement au Bénin ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Je suis basé au Bénin et j'interviens sur place auprès des PME locales. J'accompagne aussi à distance les entreprises francophones (Afrique de l'Ouest, Europe, Canada) selon la nature du projet." }},
+        { "@type": "Question", "name": "Combien de temps faut-il pour créer mon site ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "En moyenne 2 à 3 semaines pour un site vitrine complet, 1 à 2 semaines pour une optimisation de site existant. Le délai exact dépend de la complexité du projet et de la rapidité de validation des étapes." }},
+        { "@type": "Question", "name": "Que se passe-t-il après la livraison ?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Je vous forme à l'utilisation de votre site et vous livre un système de gestion simple. Vous êtes autonome pour modifier vos contenus. Je reste disponible pour des questions et propose des options de maintenance si besoin." }},
         { "@type": "Question", "name": "Mon site existe déjà mais il est endormi. Vous pouvez aider ?",
           "acceptedAnswer": { "@type": "Answer", "text": "C'est ma spécialité. Donner vie à des sites endormis est souvent plus rapide et rentable que de tout reconstruire. On audite, on optimise le SEO, le design et la vitesse." }},
         { "@type": "Question", "name": "Est-ce que je pourrai modifier mon site moi-même après ?",
@@ -119,9 +131,12 @@ nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; a
 .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 140px 6vw 80px; position: relative; }
 .hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s 0.2s ease forwards; }
 .hero h1 { font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 900; line-height: 1.05; max-width: 900px; margin: 0 auto 32px; opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards; }
-.hero p { font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--text-muted); max-width: 600px; margin: 0 auto 48px; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
+.hero p { font-size: clamp(1.1rem, 2vw, 1.25rem); color: var(--text-muted); max-width: 600px; margin: 0 auto 32px; font-weight: 300; opacity: 0; animation: fadeUp 0.8s 0.4s ease forwards; }
 .hero-cta { display: inline-flex; align-items: center; gap: 12px; background: var(--amber); color: #000; font-weight: 600; font-size: 1rem; padding: 18px 36px; border-radius: 99px; text-decoration: none; transition: all var(--transition); opacity: 0; animation: fadeUp 0.8s 0.5s ease forwards; }
 .hero-cta:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 0 30px var(--amber-glow); }
+.hero-reassurance { font-size: 14px; color: var(--text-muted); margin-top: 20px; opacity: 0; animation: fadeUp 0.8s 0.6s ease forwards; }
+.sectors { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 48px; max-width: 800px; opacity: 0; animation: fadeUp 0.8s 0.7s ease forwards; }
+.sector-pill { font-size: 13px; color: var(--text-muted); border: 1px solid var(--border); padding: 8px 16px; border-radius: 99px; background: var(--bg-glass); }
 section { padding: 120px 6vw; position: relative; }
 .section-label { font-size: 12px; font-weight: 600; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 16px; }
 .section-title { font-size: clamp(2.2rem, 4vw, 3.5rem); margin-bottom: 64px; line-height: 1.1; }
@@ -131,7 +146,7 @@ section { padding: 120px 6vw; position: relative; }
 .stat-card:hover { background: var(--bg-glass-hover); border-color: var(--border-hover); }
 .stat-number { font-family: 'Fraunces', serif; font-size: 3.5rem; font-weight: 900; color: var(--amber); line-height: 1; margin-bottom: 12px; }
 .stat-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
-.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+.grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
 .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 64px; }
 .card { padding: 40px 32px; border-radius: var(--radius); transition: all var(--transition); position: relative; overflow: hidden; }
 .card:hover { background: var(--bg-glass-hover); border-color: var(--border-hover); transform: translateY(-4px); }
@@ -139,38 +154,31 @@ section { padding: 120px 6vw; position: relative; }
 .card-icon { color: var(--amber); margin-bottom: 24px; }
 .card h3 { font-size: 1.4rem; margin-bottom: 12px; }
 .card p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; align-items: center; max-width: 1100px; margin: 0 auto; }
+@media (max-width: 768px) { .about-grid { grid-template-columns: 1fr; } }
+.about-photo { width: 100%; aspect-ratio: 1; border-radius: var(--radius); object-fit: cover; border: 3px solid var(--amber); }
+.about-content h3 { font-size: 2rem; margin-bottom: 20px; }
+.about-content p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 16px; }
+.about-content strong { color: var(--text); }
+.case-study-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+@media (max-width: 768px) { .case-study-grid { grid-template-columns: 1fr; } }
+.case-metric { font-size: 2.5rem; font-weight: 900; color: var(--amber); font-family: 'Fraunces', serif; line-height: 1; margin-bottom: 4px; }
+.case-proofs { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 40px; }
+.case-proof img { width: 100%; border-radius: 12px; border: 1px solid var(--border); display: block; }
+.case-proof figcaption { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
 .pack-tag { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); background: var(--amber-glow); padding: 6px 14px; border-radius: 99px; margin-bottom: 24px; }
 .pack-target { font-size: 14px; color: var(--text-muted); margin-bottom: 32px; font-style: italic; }
 .pack-features { list-style: none; margin-bottom: 32px; }
 .pack-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-muted); margin-bottom: 16px; }
 .pack-features li::before { content: '→'; color: var(--amber); font-weight: bold; }
-.pack-price { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 700; color: var(--amber); margin-top: auto; }
+.pack-price { font-family: 'Fraunces', serif; font-size: 1.3rem; font-weight: 700; color: var(--amber); margin-top: auto; padding-top: 20px; border-top: 1px solid var(--border); }
 .guarantee-box { border: 1px solid var(--amber); border-radius: var(--radius); padding: 64px 40px; text-align: center; max-width: 900px; margin: 0 auto; background: radial-gradient(circle at center, var(--amber-glow) 0%, transparent 70%); }
 .guarantee-box h3 { font-size: 2rem; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 16px; }
 .guarantee-box p { font-size: 16px; color: var(--text-muted); line-height: 1.8; max-width: 700px; margin: 0 auto; }
 .guarantee-box strong { color: var(--text); }
-.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 64px; }
-.testimonial-card { padding: 32px; border-radius: var(--radius); }
-.testimonial-stars { display: flex; gap: 4px; color: var(--amber); margin-bottom: 20px; }
-.testimonial-text { font-size: 16px; line-height: 1.7; margin-bottom: 24px; font-style: italic; color: var(--text); }
-.testimonial-author { display: flex; align-items: center; gap: 16px; }
-.testimonial-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--amber-glow); border: 1px solid var(--amber); display: flex; align-items: center; justify-content: center; color: var(--amber); font-weight: 700; }
-.testimonial-info h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-.testimonial-info p { font-size: 13px; color: var(--text-muted); }
-.empty-reviews { text-align: center; padding: 64px 24px; border-radius: var(--radius); border: 1px dashed var(--border); margin-bottom: 64px; }
-.empty-reviews p { color: var(--text-muted); margin-top: 16px; }
-.review-form { max-width: 600px; margin: 0 auto; padding: 48px 40px; border-radius: var(--radius); }
-.review-form h3 { font-size: 1.8rem; margin-bottom: 32px; text-align: center; }
-.form-group { margin-bottom: 24px; }
-.form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 10px; color: var(--text-muted); }
-.form-group input, .form-group textarea { width: 100%; padding: 14px 18px; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 12px; font-family: 'Inter', sans-serif; font-size: 15px; color: var(--text); transition: all var(--transition); }
-.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--amber); box-shadow: 0 0 0 3px var(--amber-glow); }
-.form-group textarea { resize: vertical; min-height: 120px; }
-.star-rating { display: flex; gap: 8px; margin-bottom: 8px; }
-.star { cursor: pointer; color: var(--border); transition: all 0.2s; }
-.star:hover, .star.active { color: var(--amber); transform: scale(1.1); }
-.submit-btn { width: 100%; padding: 16px; background: var(--amber); color: #000; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all var(--transition); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
-.submit-btn:hover { background: #fff; transform: translateY(-2px); }
+.guarantee-conditions { text-align: left; max-width: 650px; margin: 32px auto 0; padding: 24px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid var(--border); }
+.guarantee-conditions p { font-size: 14.5px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6; }
+.guarantee-conditions p:last-child { margin-bottom: 0; }
 .faq-list { max-width: 800px; margin: 0 auto; }
 .faq-item { border-radius: var(--radius); margin-bottom: 16px; overflow: hidden; transition: all var(--transition); }
 .faq-item:hover { border-color: var(--border-hover); }
@@ -178,19 +186,12 @@ section { padding: 120px 6vw; position: relative; }
 .faq-icon { color: var(--amber); transition: transform var(--transition); }
 .faq-item.active .faq-icon { transform: rotate(45deg); }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
-.faq-item.active .faq-answer { max-height: 300px; }
+.faq-item.active .faq-answer { max-height: 500px; }
 .faq-answer p { padding: 0 24px 24px; font-size: 15px; color: var(--text-muted); line-height: 1.7; }
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
-.blog-card { border-radius: var(--radius); overflow: hidden; transition: all var(--transition); }
-.blog-card:hover { transform: translateY(-4px); border-color: var(--border-hover); }
-.blog-visual { height: 200px; background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(234,88,12,0.1)); display: flex; align-items: center; justify-content: center; color: var(--amber); border-bottom: 1px solid var(--border); }
-.blog-content { padding: 28px; }
-.blog-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
-.blog-card h3 { font-size: 1.3rem; margin-bottom: 12px; line-height: 1.3; }
-.blog-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
 .cta-section { text-align: center; padding: 160px 6vw; }
 .cta-section h2 { font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 24px; line-height: 1.1; }
-.cta-section p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 48px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.cta-section p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+.cta-reassurance { font-size: 14px; color: var(--text-muted); margin-top: 20px; }
 .cta-big { display: inline-flex; align-items: center; gap: 12px; background: var(--amber); color: #000; font-weight: 600; font-size: 1.1rem; padding: 20px 40px; border-radius: 99px; text-decoration: none; transition: all var(--transition); }
 .cta-big:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 0 40px var(--amber-glow); }
 footer { padding: 80px 6vw 40px; border-top: 1px solid var(--border); }
@@ -217,14 +218,14 @@ footer p { font-size: 13px; color: var(--text-muted); }
 <a class="nav-logo" href="/">Digital <span>Neighbor</span></a>
 <ul class="nav-links">
 <li><a href="#process">Méthode</a></li>
+<li><a href="#about">À propos</a></li>
+<li><a href="#case-study">Résultats</a></li>
 <li><a href="#services">Solutions</a></li>
 <li><a href="#guarantee">Garantie</a></li>
-<li><a href="#testimonials">Avis</a></li>
 <li><a href="#faq">FAQ</a></li>
-<li><a href="#blog">Blog</a></li>
 </ul>
 <div style="display:flex; gap:16px; align-items:center;">
-<a class="nav-cta" href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">Audit gratuit</a>
+<a class="nav-cta" href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">Auditer mon site</a>
 <button class="mobile-toggle" id="mobileToggle" aria-label="Ouvrir le menu">
 <svg class="icon" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
 </button>
@@ -233,66 +234,145 @@ footer p { font-size: 13px; color: var(--text-muted); }
 
 <div class="mobile-menu" id="mobileMenu">
 <a href="#process">Méthode</a>
+<a href="#about">À propos</a>
+<a href="#case-study">Résultats</a>
 <a href="#services">Solutions</a>
 <a href="#guarantee">Garantie</a>
-<a href="#testimonials">Avis</a>
 <a href="#faq">FAQ</a>
-<a href="#blog">Blog</a>
 </div>
 
 <main>
 <section class="hero">
-<p class="hero-eyebrow">Accompagnateur de croissance locale</p>
+<p class="hero-eyebrow">Accompagnateur de croissance locale · Bénin & francophonie</p>
 <h1>Ne laissez plus votre business être un <em>secret</em>.</h1>
 <p>Nous donnons vie à votre présence en ligne. Site web sur-mesure, fiche Google optimisée et indexation garantie. Visible là où vos clients vous cherchent.</p>
 <a class="hero-cta" href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">
-Demander mon audit gratuit
+Auditer mon site gratuitement
 <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
 </a>
+<p class="hero-reassurance">Audit gratuit · Sans engagement · Réponse sous 24h</p>
+<div class="sectors">
+<span class="sector-pill">Restaurants</span>
+<span class="sector-pill">Boutiques & catalogues</span>
+<span class="sector-pill">Artisans & BTP</span>
+<span class="sector-pill">Centres de formation</span>
+<span class="sector-pill">Salons & beauté</span>
+<span class="sector-pill">Professions libérales</span>
+<span class="sector-pill">Services locaux</span>
+</div>
 </section>
 
 <section class="stats">
 <div class="stats-grid">
-<div class="stat-card glass reveal"><div class="stat-number">2</div><div class="stat-label">Business accompagnés</div></div>
-<div class="stat-card glass reveal"><div class="stat-number">100%</div><div class="stat-label">Écoute & flexibilité</div></div>
-<div class="stat-card glass reveal"><div class="stat-number">2/2</div><div class="stat-label">Résultats garantis</div></div>
+<div class="stat-card glass reveal"><div class="stat-number">100%</div><div class="stat-label">Solutions sur-mesure</div></div>
 <div class="stat-card glass reveal"><div class="stat-number">24h</div><div class="stat-label">Délai de réponse max</div></div>
+<div class="stat-card glass reveal"><div class="stat-number">2/2</div><div class="stat-label">Résultats garantis</div></div>
+<div class="stat-card glass reveal"><div class="stat-number">0€</div><div class="stat-label">Audit initial</div></div>
 </div>
 </section>
 
 <section id="process">
-<div class="reveal"><div class="section-label">Notre méthode</div><h2 class="section-title">4 étapes pour réveiller votre activité</h2></div>
+<div class="reveal"><div class="section-label">Notre méthode</div><h2 class="section-title">5 étapes pour réveiller votre activité</h2></div>
 <div class="grid-4">
 <div class="card glass reveal"><div class="card-number">01</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><h3>Audit & Échange</h3><p>Diagnostic gratuit de votre présence en ligne actuelle. On identifie ensemble vos blocages.</p></div>
-<div class="card glass reveal"><div class="card-number">02</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><h3>Stratégie sur-mesure</h3><p>Pas de package rigide. Une proposition adaptée à VOTRE budget et vos besoins réels.</p></div>
-<div class="card glass reveal"><div class="card-number">03</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><h3>Mise en œuvre</h3><p>Création ou optimisation. Vous validez chaque étape avant la mise en ligne.</p></div>
-<div class="card glass reveal"><div class="card-number">04</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Garantie & Suivi</h3><p>Je m'engage sur votre visibilité. Formation et suivi pour assurer votre autonomie.</p></div>
+<div class="card glass reveal"><div class="card-number">02</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg><h3>Stratégie & accord de mesure</h3><p>Pas de package rigide. On valide ensemble vos mots-clés cibles et votre zone : c'est la base de la proposition… et de la garantie.</p></div>
+<div class="card glass reveal"><div class="card-number">03</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><h3>Création & Optimisation</h3><p>Vous validez chaque étape avant la mise en ligne. Transparence totale.</p></div>
+<div class="card glass reveal"><div class="card-number">04</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><h3>Mise en visibilité</h3><p>Google, SEO local, fiche Business. Votre site travaille pour vous 24h/24.</p></div>
+<div class="card glass reveal"><div class="card-number">05</div><svg class="icon icon-xl card-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><h3>Suivi & Garantie</h3><p>Formation incluse + garantie de résultat sous 30 jours. Vous êtes autonome.</p></div>
 </div>
 </section>
 
-<section id="services" style="background: rgba(255,255,255,0.01);">
+<section id="about" style="background: rgba(255,255,255,0.01);">
+<div class="reveal"><div class="section-label">Qui suis-je ?</div><h2 class="section-title">Un voisin, pas une usine.</h2></div>
+<div class="about-grid reveal">
+<div>
+<img src="images/my_website_profile_image.jpeg" alt="Dave — fondateur de Digital Neighbor" class="about-photo">
+</div>
+<div class="about-content">
+<h3>Digital Neighbor, c'est moi : Dave.</h3>
+<p>J'ai créé Digital Neighbor avec une conviction simple : <strong>les PME locales méritent d'être trouvées</strong>, sans devoir dépenser des fortunes dans des agences impersonnelles.</p>
+<p>Avant ça, j'ai étudié les mathématiques à l'uac puis les technologies de l'information à Epitech Benin avant de concevoir des sites et des systèmes web , dont une plateforme complète de gestion pour une salle de sport au Bénin. J'ai vu trop de belles entreprises rester invisibles parce que personne ne leur avait expliqué comment fonctionne Google.</p>
+<p>Basé au Bénin, j'accompagne les PME locales <strong>sur le terrain</strong> — et les entreprises francophones partout ailleurs, <strong>à distance</strong>.</p>
+<p>Et surtout : <strong>je travaille directement avec vous</strong>. Pas de commercial, pas d'intermédiaire. La personne qui vous répond est celle qui construit votre projet.</p>
+</div>
+</div>
+</section>
+
+<section id="case-study">
+<div class="reveal"><div class="section-label">Résultats prouvés</div><h2 class="section-title">Comment un centre de formation a reçu 2 contacts clients en 7 jours</h2></div>
+<div class="case-study-box glass reveal" style="padding:40px;border-radius:var(--radius);margin-top:40px;border:1px solid var(--border-hover);">
+  <div class="case-study-grid">
+    <div>
+      <h3 style="font-size:1.5rem;margin-bottom:20px;">Le problème</h3>
+      <p style="color:var(--text-muted);line-height:1.7;">
+        BBT Solutions, centre de formation à Cotonou, avait un site invisible sur Google.
+        Aucun élément structuré détecté, pas de fiche Google Business optimisée,
+        des témoignages génériques qui ne convertissaient pas.
+      </p>
+      <h3 style="font-size:1.5rem;margin:30px 0 20px;">La solution</h3>
+      <ul style="color:var(--text-muted);line-height:1.8;padding-left:20px;">
+        <li>Injection de données structurées (Schema.org)</li>
+        <li>Optimisation SEO local + fiche Google Business</li>
+        <li>Remplacement des témoignages par de vrais profils locaux</li>
+        <li>Correction des parcours de contact (WhatsApp)</li>
+      </ul>
+    </div>
+    <div style="background:rgba(245,158,11,0.05);padding:30px;border-radius:var(--radius);border:1px solid var(--amber);">
+      <h3 style="font-size:1.5rem;margin-bottom:20px;color:var(--amber);">Les résultats (Semaine 1)</h3>
+      <div style="display:grid;gap:20px;">
+        <div><div class="case-metric">+11</div><div style="color:var(--text-muted);">Visites qualifiées sur le site</div></div>
+        <div><div class="case-metric">2</div><div style="color:var(--text-muted);">Contacts clients directs (leads entrants)</div></div>
+        <div><div class="case-metric">6</div><div style="color:var(--text-muted);">Éléments Rich Results validés par Google</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="case-proofs">
+    <figure class="case-proof">
+      <img src="images/avant_vs_après_bbt.jpeg" alt="Google Search Console de BBT Solutions : impressions et clics après optimisation">
+      <figcaption>Search Console : le site passe de 1 élément détecté à une présence mesurable dans Google.</figcaption>
+    </figure>
+    <figure class="case-proof">
+      <img src="images/search_console_bbt.png" alt="Test Rich Results Google : 6 éléments structurés valides pour BBT Solutions">
+      <figcaption>Apparitions du site dand les recherches juste 1 semaine après optimisations.</figcaption>
+    </figure>
+    <figure class="case-proof">
+      <img src="images/resultat_recherche_bbt.png" alt="Résultat de recherche Google : BBT Solutions visible avec son adresse à Cotonou">
+      <figcaption>Recherche « bbt solutions cotonou » : le site apparaît avec son adresse dans les résultats locaux.</figcaption>
+    </figure>
+  </div>
+  <div style="margin-top:40px;padding-top:30px;border-top:1px solid var(--border);">
+    <blockquote style="font-style:italic;font-size:1.1rem;line-height:1.7;color:var(--text);margin:0;">
+      "Depuis les optimisations, on reçoit des contacts directs chaque semaine.
+      C'est exactement ce qu'il nous fallait pour remplir nos formations."
+    </blockquote>
+    <p style="margin-top:15px;font-weight:600;color:var(--text);">— Fondateur — BBT Solutions, Cotonou</p>
+  </div>
+</div>
+</section>
+
+<section id="services">
 <div class="reveal"><div class="section-label">Solutions flexibles</div><h2 class="section-title">Ce que nous construisons ensemble</h2></div>
 <div class="grid-3">
 <div class="card glass reveal" style="display:flex; flex-direction:column;">
 <div class="pack-tag">Réveil Digital</div>
 <h3>Optimisation de site existant</h3>
-<p class="pack-target">Votre site est en ligne mais ne vous apporte rien ? Redonnons-lui vie.</p>
+<p class="pack-target">Votre site existe. On lui redonne vie.</p>
 <ul class="pack-features"><li>Audit complet de performance et SEO</li><li>Refonte du design pour inspirer confiance</li><li>Optimisation vitesse et expérience mobile</li><li>Correction de l'indexation Google</li></ul>
-<div class="pack-price">Sur devis personnalisé</div>
+<div class="pack-price">À partir de 120000 XOF</div>
 </div>
 <div class="card glass reveal" style="display:flex; flex-direction:column;">
 <div class="pack-tag">Fondation Pro</div>
 <h3>Site Vitrine ou Catalogue</h3>
-<p class="pack-target">Pour les PME qui veulent poser leur crédibilité ou vendre en ligne.</p>
+<p class="pack-target">Votre entreprise mérite une présence professionnelle.</p>
 <ul class="pack-features"><li>Design moderne, rapide et 100% mobile</li><li>Intégration services, produits et témoignages</li><li>Contact direct (WhatsApp, formulaire)</li><li>Tableau de bord pour gérer votre contenu</li></ul>
-<div class="pack-price">Sur devis personnalisé</div>
+<div class="pack-price">À partir de 250000 XOF</div>
 </div>
 <div class="card glass reveal" style="display:flex; flex-direction:column;">
 <div class="pack-tag">Visibilité Locale</div>
 <h3>Domination Google</h3>
-<p class="pack-target">Soyez le premier choix dans votre zone de chalandise.</p>
+<p class="pack-target">Soyez trouvé quand vos clients cherchent autour de vous.</p>
 <ul class="pack-features"><li>Création et optimisation Fiche Google Business</li><li>Stratégie de mots-clés locaux</li><li>Indexation garantie sur les moteurs</li><li>Guide pour récolter vos premiers avis</li></ul>
-<div class="pack-price">Sur devis personnalisé</div>
+<div class="pack-price">À partir de 60000 XOF</div>
 </div>
 </div>
 </section>
@@ -301,56 +381,34 @@ Demander mon audit gratuit
 <div class="reveal">
 <div class="guarantee-box glass">
 <h3><svg class="icon icon-lg" viewBox="0 0 24 24" style="color:var(--amber)" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Notre engagement de résultat</h3>
-<p>Je ne vends pas du vent, je vends de la visibilité. Je m'engage sur deux résultats concrets : <strong>1.</strong> Votre site doit être indexé et trouvable via la recherche Google. <strong>2.</strong> Votre fiche Google Business doit être optimisée et visible. <br><br>Si l'un de ces deux résultats n'est pas atteint, <strong>la partie correspondante du service vous est intégralement remboursée</strong>. Sans discussion.</p>
-</div>
-</div>
-</section>
+<p>Je ne vends pas du vent, je vends de la visibilité. Je m'engage sur deux résultats concrets et mesurables sous 30 jours :</p>
 
-<section id="testimonials" style="background: rgba(255,255,255,0.01);">
-<div class="reveal"><div class="section-label">Ils nous font confiance</div><h2 class="section-title">Avis de nos clients</h2></div>
-<div class="testimonials-grid" id="testimonialsGrid"></div>
-<div class="empty-reviews glass" id="emptyReviews">
-<svg class="icon icon-xl" viewBox="0 0 24 24" style="color:var(--amber);margin:0 auto" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-<p><strong>Aucun avis pour le moment.</strong><br>Soyez le premier à partager votre expérience avec Digital Neighbor !</p>
+<div style="text-align:left; max-width:600px; margin:32px auto; color:var(--text);">
+<p style="margin-bottom:20px; font-size:17px;"><strong style="color:var(--amber);">1. Indexation Google :</strong> votre site apparaît dans Google (vérifiable via <em>site:votresite.com</em>) et dans les résultats pour les mots-clés cibles que nous aurons définis ensemble.</p>
+<p style="margin-bottom:20px; font-size:17px;"><strong style="color:var(--amber);">2. Fiche Google Business visible :</strong> votre fiche est complète, optimisée, et visible dans le Pack Local pour la recherche locale de référence convenue ensemble.</p>
+<p style="font-size:17px;"><strong>La promesse :</strong> si l'un de ces deux résultats n'est pas atteint à J+30, <strong>la partie correspondante du service vous est intégralement remboursée</strong>. Sans discussion.</p>
 </div>
-<div class="review-form glass reveal">
-<h3>Laisser votre avis</h3>
-<form id="reviewForm">
-<div class="form-group">
-<label>Votre note</label>
-<div class="star-rating" id="starRating" role="radiogroup" aria-label="Note">
-<span class="star" data-rating="1" role="radio" aria-label="1 étoile"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-<span class="star" data-rating="2" role="radio" aria-label="2 étoiles"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-<span class="star" data-rating="3" role="radio" aria-label="3 étoiles"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-<span class="star" data-rating="4" role="radio" aria-label="4 étoiles"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
-<span class="star" data-rating="5" role="radio" aria-label="5 étoiles"><svg class="icon icon-lg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+
+<div class="guarantee-conditions">
+<p><strong style="color:var(--amber);">🎯 Notre accord de départ :</strong> avant le début de la prestation, nous définissons et validons ensemble, noir sur blanc dans la proposition : les mots-clés cibles, la zone géographique, la recherche locale de référence et les conditions de mesure. C'est cette liste qui sert de base à la garantie — aucune interprétation possible à J+30.</p>
+<p><strong style="color:var(--amber);">⚠️ Ce que la garantie ne couvre pas :</strong> une position n°1 promise (personne ne peut la garantir honnêtement), un nombre précis de visites ou de clients, ou les variations d'algorithme hors de notre contrôle.</p>
+<p><strong style="color:var(--amber);">🤝 Vos engagements :</strong> fournir les accès Google/Site sous 7 jours, donner des informations commerciales exactes, valider les étapes rapidement, et ne pas modifier vous-même le site ou la fiche pendant la période de test de 30 jours.</p>
 </div>
+
 </div>
-<div class="form-group"><label for="reviewName">Votre nom</label><input type="text" id="reviewName" required placeholder="Ex: Jean Dupont"></div>
-<div class="form-group"><label for="reviewBusiness">Votre activité</label><input type="text" id="reviewBusiness" required placeholder="Ex: Restaurant, Plomberie..."></div>
-<div class="form-group"><label for="reviewText">Votre témoignage</label><textarea id="reviewText" required placeholder="Partagez votre expérience..."></textarea></div>
-<button type="submit" class="submit-btn">Publier mon avis</button>
-</form>
 </div>
 </section>
 
 <section id="faq">
 <div class="reveal"><div class="section-label">Questions fréquentes</div><h2 class="section-title">Tout ce que vous devez savoir</h2></div>
 <div class="faq-list">
-<div class="faq-item glass reveal"><div class="faq-question"><span>Combien coûte une prestation ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>En tant que consultant, je m'adapte à la réalité de chaque PME. Il n'y a pas de tarifs fixes. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible.</p></div></div>
-<div class="faq-item glass reveal"><div class="faq-question"><span>C'est quoi votre garantie exactement ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Je m'engage sur deux résultats : l'indexation de votre site sur Google et la visibilité de votre fiche Google Business. Si l'un des deux n'est pas atteint, la partie correspondante est remboursée.</p></div></div>
+<div class="faq-item glass reveal"><div class="faq-question"><span>Combien coûte une prestation ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Nos solutions commencent à partir de 120000 XOF pour une optimisation, 60000 XOF pour la visibilité locale et 250000 XOF pour une création complète. Le prix final dépend de l'état du site et des objectifs. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible.</p></div></div>
+<div class="faq-item glass reveal"><div class="faq-question"><span>C'est quoi votre garantie exactement ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Je garantis l'indexation de votre site sur Google (vérifiable via la recherche "site:votresite.com") et la visibilité de votre fiche Google Business dans le Pack Local. Avant de commencer, nous validons ensemble les mots-clés cibles, la zone géographique et la recherche locale de référence : c'est cette liste convenue au départ qui sert de mesure à J+30. Ce n'est pas une promesse de 1ère place, c'est une promesse d'indexation et de mise en visibilité de votre marque. Si l'un des deux n'est pas atteint, la partie correspondante est remboursée.</p></div></div>
+<div class="faq-item glass reveal"><div class="faq-question"><span>Vous travaillez uniquement au Bénin ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Je suis basé au Bénin et j'interviens sur place auprès des PME locales. J'accompagne aussi à distance les entreprises francophones (Afrique de l'Ouest, Europe, Canada) selon la nature du projet.</p></div></div>
+<div class="faq-item glass reveal"><div class="faq-question"><span>Combien de temps faut-il pour créer mon site ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>En moyenne 2 à 3 semaines pour un site vitrine complet, 1 à 2 semaines pour une optimisation de site existant. Le délai exact dépend de la complexité du projet et de la rapidité de validation des étapes.</p></div></div>
+<div class="faq-item glass reveal"><div class="faq-question"><span>Que se passe-t-il après la livraison ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Je vous forme à l'utilisation de votre site et vous livre un système de gestion simple. Vous êtes autonome pour modifier vos contenus. Je reste disponible pour des questions et propose des options de maintenance si besoin.</p></div></div>
 <div class="faq-item glass reveal"><div class="faq-question"><span>Mon site existe déjà mais il est "endormi". Vous pouvez aider ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>C'est ma spécialité. Donner vie à des sites endormis est souvent plus rapide et rentable que de tout reconstruire. On audite, on optimise le SEO, le design et la vitesse.</p></div></div>
 <div class="faq-item glass reveal"><div class="faq-question"><span>Est-ce que je pourrai modifier mon site moi-même après ?</span><svg class="icon faq-icon" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-answer"><p>Oui, absolument. Je vous livre avec un système de gestion simple et une formation pour que vous puissiez modifier vos contenus sans dépendre de moi.</p></div></div>
-</div>
-</section>
-
-<section id="blog" style="background: rgba(255,255,255,0.01);">
-<div class="reveal"><div class="section-label">Ressources</div><h2 class="section-title">Conseils pour votre visibilité</h2></div>
-<div class="blog-grid">
-<a href="blog.html#article-4" style="text-decoration:none;color:inherit"><div class="blog-card glass reveal"><div class="blog-visual"><svg class="icon icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="blog-content"><div class="blog-meta"><span>28 Août 2026</span><span>6 min</span></div><h3>Fiche Google : comment apparaître quand on vous cherche</h3><p>Le guide pour entrer dans les 3 résultats de la carte Google et attirer les clients de votre quartier.</p></div></div></a>
-<a href="blog.html#article-1" style="text-decoration:none;color:inherit"><div class="blog-card glass reveal"><div class="blog-visual"><svg class="icon icon-xl" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div><div class="blog-content"><div class="blog-meta"><span>15 Juin 2026</span><span>5 min</span></div><h3>5 erreurs qui tuent vos ventes sur Instagram</h3><p>Découvrez les pièges classiques des vendeurs en ligne et comment les éviter.</p></div></div></a>
-<a href="blog.html#article-2" style="text-decoration:none;color:inherit"><div class="blog-card glass reveal"><div class="blog-visual"><svg class="icon icon-xl" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg></div><div class="blog-content"><div class="blog-meta"><span>8 Juin 2026</span><span>7 min</span></div><h3>L'IA intégrée à votre site : le levier de croissance</h3><p>Comment intégrer l'IA via API pour automatiser et développer votre activité.</p></div></div></a>
-<a href="blog.html#article-3" style="text-decoration:none;color:inherit"><div class="blog-card glass reveal"><div class="blog-visual"><svg class="icon icon-xl" viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div><div class="blog-content"><div class="blog-meta"><span>1 Juin 2026</span><span>6 min</span></div><h3>Site vitrine vs catalogue : lequel choisir ?</h3><p>Comparatif pour savoir quelle solution correspond le mieux à votre activité.</p></div></div></a>
 </div>
 </section>
 
@@ -358,20 +416,21 @@ Demander mon audit gratuit
 <div class="glow-top" style="top:auto; bottom:-200px;"></div>
 <h2 class="reveal">Prêt à <em>réveiller</em> votre activité ?</h2>
 <p class="reveal">30 minutes d'audit gratuit suffisent pour identifier les blocages et vous proposer un plan d'action clair.</p>
-<a class="cta-big reveal" href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">Demander mon audit gratuit</a>
+<a class="cta-big reveal" href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">Auditer mon site gratuitement</a>
+<p class="cta-reassurance">Audit gratuit · Sans engagement · Réponse sous 24h</p>
 </section>
 </main>
 
 <footer>
 <div class="footer-grid">
 <div class="footer-col"><h4>Solutions</h4><ul><li><a href="#services">Réveil de site</a></li><li><a href="#services">Site Vitrine / Catalogue</a></li><li><a href="#services">Optimisation Google</a></li></ul></div>
-<div class="footer-col"><h4>Ressources</h4><ul><li><a href="#blog">Blog</a></li><li><a href="#faq">FAQ</a></li><li><a href="#testimonials">Témoignages</a></li></ul></div>
+<div class="footer-col"><h4>Ressources</h4><ul><li><a href="#case-study">Étude de cas</a></li><li><a href="#about">À propos</a></li><li><a href="#faq">FAQ</a></li><li><a href="blog.html">Blog & guides</a></li></ul></div>
 <div class="footer-col"><h4>Contact</h4><ul><li><a href="https://wa.me/message/5T343GB4HXLRH1" target="_blank" rel="noopener">WhatsApp</a></li><li><a href="mailto:digitalneighbor@outlook.com">Email</a></li><li><a href="https://instagram.com/digital_neighbor" target="_blank" rel="noopener">Instagram</a></li></ul></div>
 <div class="footer-col"><h4>Légal</h4><ul><li><a href="#">Mentions légales</a></li><li><a href="#">Confidentialité</a></li></ul></div>
 </div>
 <div class="footer-bottom">
 <div class="footer-brand">Digital <span>Neighbor</span></div>
-<p>© 2026 Digital Neighbor — Accompagnateur de croissance locale</p>
+<p>© 2026 Digital Neighbor — Basé au Bénin · Accompagnateur de croissance locale</p>
 </div>
 </footer>
 
@@ -391,50 +450,6 @@ const isActive = item.classList.contains('active');
 document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
 if (!isActive) item.classList.add('active');
 });
-});
-const testimonialsGrid = document.getElementById('testimonialsGrid');
-const emptyReviews = document.getElementById('emptyReviews');
-const reviewForm = document.getElementById('reviewForm');
-let selectedRating = 0;
-const stars = document.querySelectorAll('#starRating .star');
-function updateEmptyState() {
-const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-emptyReviews.style.display = reviews.length === 0 ? 'block' : 'none';
-}
-function updateStarsDisplay(rating) {
-stars.forEach((s, index) => s.classList.toggle('active', index < rating));
-}
-stars.forEach(star => {
-star.addEventListener('click', () => { selectedRating = parseInt(star.getAttribute('data-rating')); updateStarsDisplay(selectedRating); });
-star.addEventListener('mouseenter', () => { const r = parseInt(star.getAttribute('data-rating')); stars.forEach((s, i) => s.style.color = i < r ? 'var(--amber)' : 'var(--border)'); });
-});
-document.getElementById('starRating').addEventListener('mouseleave', () => { stars.forEach(s => s.style.color = ''); updateStarsDisplay(selectedRating); });
-function addReviewToDOM(review) {
-const card = document.createElement('div');
-card.className = 'testimonial-card glass';
-const initials = review.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-card.innerHTML = `
-<div class="testimonial-stars">${'★'.repeat(review.rating)}${'☆'.repeat(5-review.rating)}</div>
-<p class="testimonial-text">"${review.text}"</p>
-<div class="testimonial-author">
-<div class="testimonial-avatar">${initials}</div>
-<div class="testimonial-info"><h4>${review.name}</h4><p>${review.business}</p></div>
-</div>`;
-testimonialsGrid.appendChild(card);
-}
-const savedReviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-savedReviews.forEach(addReviewToDOM);
-updateEmptyState();
-reviewForm.addEventListener('submit', (e) => {
-e.preventDefault();
-if (selectedRating === 0) { alert('Veuillez sélectionner une note'); return; }
-const review = { name: document.getElementById('reviewName').value, business: document.getElementById('reviewBusiness').value, text: document.getElementById('reviewText').value, rating: selectedRating };
-const reviews = JSON.parse(localStorage.getItem('reviews') || '[]');
-reviews.unshift(review);
-localStorage.setItem('reviews', JSON.stringify(reviews));
-addReviewToDOM(review);
-reviewForm.reset(); selectedRating = 0; updateStarsDisplay(0); updateEmptyState();
-alert('Merci pour votre avis !');
 });
 </script>
 </body>

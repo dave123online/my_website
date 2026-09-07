@@ -67,7 +67,7 @@
       "@type": "FAQPage",
       "mainEntity": [
         { "@type": "Question", "name": "Combien coûte une prestation ?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Les tarifs commencent à partir de 120000 XOF pour une optimisation de site existant, 60000 XOF pour la visibilité locale et 250000 XOF pour une création complète. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible." }},
+          "acceptedAnswer": { "@type": "Answer", "text": "Les tarifs commencent à partir de 120000 XOF pour une optimisation de site existant, 450€ pour la visibilité locale et 250000 XOF pour une création complète. Après un audit gratuit, je vous propose un devis sur-mesure, transparent et flexible." }},
         { "@type": "Question", "name": "C'est quoi votre garantie exactement ?",
           "acceptedAnswer": { "@type": "Answer", "text": "Je m'engage sur deux résultats mesurables sous 30 jours : l'indexation de votre site sur Google (vérifiable via la commande site:votresite.com) et la visibilité de votre fiche Google Business dans le Pack Local. Avant de commencer, nous validons ensemble les mots-clés cibles, la zone géographique et la recherche locale de référence : c'est cette liste convenue qui sert de mesure à J+30. Si l'un des deux résultats n'est pas atteint, la partie correspondante est remboursée." }},
         { "@type": "Question", "name": "Vous travaillez uniquement au Bénin ?",
@@ -209,6 +209,72 @@ footer p { font-size: 13px; color: var(--text-muted); }
 .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 @media (max-width: 768px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } .grid-4, .grid-3 { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; text-align: center; } .guarantee-box { padding: 40px 24px; } }
+/* Augmenter l'espacement global */
+section { padding: 140px 6vw; } /* était 120px */
+
+/* Hero plus généreux */
+.hero { padding: 160px 6vw 100px; } /* était 140px 6vw 80px */
+.hero h1 { margin: 0 auto 48px; } /* était 32px */
+.hero p { margin: 0 auto 48px; } /* était 32px */
+
+/* Stats section */
+.stats { padding: 80px 6vw; } /* ajouter du padding */
+.stats-grid { gap: 48px; } /* était 32px */
+.stat-card { padding: 48px 32px; } /* était 40px 24px */
+
+/* Grilles plus aérées */
+.grid-4 { gap: 32px; } /* était 24px */
+.grid-3 { gap: 32px; margin-bottom: 80px; } /* était 24px et 64px */
+
+/* Cards plus spacieuses */
+.card { padding: 48px 36px; } /* était 40px 32px */
+.card h3 { margin-bottom: 16px; } /* était 12px */
+.card p { line-height: 1.7; } /* était 1.6 */
+
+/* Section About */
+.about-grid { gap: 80px; } /* était 60px */
+.about-content h3 { margin-bottom: 32px; } /* était 20px */
+.about-content p { margin-bottom: 24px; line-height: 1.9; } /* était 16px et 1.8 */
+
+/* Case Study */
+.case-study-grid { gap: 60px; } /* était 40px */
+.case-proofs { gap: 32px; margin-top: 60px; } /* était 20px et 40px */
+
+/* Guarantee */
+.guarantee-box { padding: 80px 60px; } /* était 64px 40px */
+.guarantee-box h3 { margin-bottom: 32px; } /* était 24px */
+.guarantee-box p { line-height: 1.9; } /* était 1.8 */
+.guarantee-conditions { margin: 48px auto 0; padding: 32px; } /* était 32px auto 0 et 24px */
+.guarantee-conditions p { margin-bottom: 20px; line-height: 1.7; } /* était 16px et 1.6 */
+
+/* FAQ */
+.faq-list { max-width: 800px; }
+.faq-item { margin-bottom: 20px; } /* était 16px */
+.faq-question { padding: 28px; } /* était 24px */
+.faq-answer p { padding: 0 28px 28px; line-height: 1.8; } /* était 0 24px 24px et 1.7 */
+
+/* CTA final */
+.cta-section { padding: 180px 6vw; } /* était 160px 6vw */
+.cta-section h2 { margin-bottom: 32px; } /* était 24px */
+.cta-section p { margin-bottom: 48px; } /* était 32px */
+
+/* Footer */
+footer { padding: 100px 6vw 60px; } /* était 80px 6vw 40px */
+.footer-grid { gap: 60px; margin-bottom: 80px; } /* était 40px et 60px */
+.footer-col h4 { margin-bottom: 24px; } /* était 20px */
+.footer-col li { margin-bottom: 16px; } /* était 12px */
+
+/* Typographie globale plus aérée */
+body { line-height: 1.7; } /* était 1.6 */
+.section-title { margin-bottom: 80px; } /* était 64px */
+
+/* Sectors pills */
+.sectors { margin-top: 64px; gap: 12px; } /* était 48px et 10px */
+.sector-pill { padding: 10px 20px; } /* était 8px 16px */
+
+/* Pack features */
+.pack-features li { margin-bottom: 20px; line-height: 1.7; } /* était 16px et pas de line-height */
+.pack-price { padding-top: 24px; } /* était 20px */
 </style>
 </head>
 <body>

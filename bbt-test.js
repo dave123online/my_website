@@ -154,9 +154,7 @@ Japanese scientists have also discovered that catfish become livelier several da
 `"I think the government has made a very wise decision." He ____ the government's decision.|criticised|accepted|applauded`]]]}
 ];
 
-const app=document.querySelector("#app"),answers={},players=[];
-let left=0,tick,done=false;
-
+const app=document.querySelector("#app"),answers={},players=[];let left=0,tick,done=false;
 const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
 function qHTML(id,n,s){const p=s.split("|");return `<div class="q"><b>${n}. ${esc(p[0])}</b>`+["a","b","c"].map((l,i)=>`<label><input type="radio" name="${id}" value="${l}">${l}) ${esc(p[i+1])}</label>`).join("")+"</div>"}
@@ -168,27 +166,40 @@ app.innerHTML=`<div class="card"><h2>Votre profil</h2>
 <p><input type="text" id="name" placeholder="Full name"></p>
 <p class="q"><label><input type="radio" name="mode" value="mini" checked> ${CFG.modes.mini.label} – ${CFG.modes.mini.min} min</label>
 <label><input type="radio" name="mode" value="full"> ${CFG.modes.full.label} – ${CFG.modes.full.min} min</label></p>
-<button id="go">Start</button></div>`;
+<button type="button" id="go">Start</button></div>`;
 document.querySelector("#go").onclick=()=>{const n=document.querySelector("#name").value.trim();if(!n){document.querySelector("#name").focus();return}window.cand=n;MODE=document.querySelector("input[name=mode]:checked").value;N=CFG.modes[MODE].n;left=CFG.modes[MODE].min*60;start()};
 }
 
 function start(){tick=setInterval(()=>{left--;draw();if(left<=0)finish()},1000);draw();listening()}
-
 function draw(){const m=Math.max(0,left);document.querySelector("#timer").textContent=String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
 
-function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" style="display:none"></audio></div>`}
+function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" oncontextmenu="return false"></audio></div>`}
 
-function bindAudio(){document.querySelectorAll(".aud").forEach(box=>{
-const a=box.querySelector("audio"),b=box.querySelector("button"),bar=box.querySelector("i"),st=box.querySelector(".st");let started=false,ended=false;
+function bindAudio(){
+document.querySelectorAll(".aud").forEach(box=>{
+const a=box.querySelector("audio"),b=box.querySelector("button"),bar=box.querySelector("i"),st=box.querySelector(".st");
+let started=false;
 a.addEventListener("timeupdate",()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+"%"});
-a.addEventListener("pause",()=>{if(started&&!ended&&!box.dataset.stop)a.play().catch(()=>{})});
-a.addEventListener("ended",()=>{ended=true;b.disabled=true;b.textContent="✔ Écoutée";st.textContent="Terminé";bar.style.width="100%"});
+a.addEventListener("pause",()=>{
+  // Anti-pause : on relance UNIQUEMENT si l'audio n'est pas encore terminé
+  // (le test a.currentTime < duration-0.5 empêche la reprise en double en fin de piste)
+  if(started && !a.ended && !box.dataset.stop && a.currentTime < a.duration-0.5){
+    a.play().catch(()=>{});
+  }
+});
+a.addEventListener("ended",()=>{
+  b.disabled=true;b.textContent="✔ Écoutée";st.textContent="Terminé";bar.style.width="100%";
+});
 a.addEventListener("error",()=>{st.textContent="Audio indisponible"});
-b.onclick=()=>{if(started)return;
-if(players.some(p=>p.a!==a&&!p.a.paused)){st.textContent="Attendez la fin de l'autre piste";return}
-started=true;b.disabled=true;b.textContent="🔊 Lecture en cours…";st.textContent="Ne quittez pas la page";
-a.play().catch(()=>{started=false;b.disabled=false;b.textContent="▶ Écouter (une seule fois)";st.textContent="Appuyez de nouveau"})};
-players.push({a,box})})}
+b.onclick=()=>{
+  if(started)return;
+  if(players.some(p=>p.a!==a&&!p.a.paused)){st.textContent="Attendez la fin de l'autre piste";return}
+  started=true;b.disabled=true;b.textContent="🔊 Lecture en cours…";st.textContent="Ne quittez pas la page";
+  a.play().catch(()=>{started=false;b.disabled=false;b.textContent="▶ Écouter (une seule fois)";st.textContent="Appuyez de nouveau"});
+};
+players.push({a,box});
+});
+}
 
 function stopAudio(){players.forEach(p=>{p.box.dataset.stop=1;p.a.pause()});players.length=0}
 
@@ -196,7 +207,7 @@ function listening(){
 let h=`<div class="card"><h2>Part 1 – Listening</h2><p class="note">You will hear short recordings. Mark the correct response a, b or c.</p>
 <div class="hp">🎧 <b>Il est conseillé d'utiliser des écouteurs ou un casque.</b> Chaque piste ne peut être écoutée <b>qu'une seule fois</b>, sans pause ni retour en arrière : lancez-la seulement quand vous êtes prêt(e), dans un endroit calme.</div></div>`;
 L.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]} – Track ${i+1}</h3>${audioHTML(i)}`+t.qs.map((q,j)=>qHTML(`L${i}_${j}`,j+1,q)).join("")+"</div>"});
-app.innerHTML=h+`<button id="nx">Next: Reading →</button>`;scrollTo(0,0);bindAudio();
+app.innerHTML=h+`<button type="button" id="nx">Next: Reading →</button>`;scrollTo(0,0);bindAudio();
 document.querySelector("#nx").onclick=()=>{if(!confirm("Passer au Reading ? Vous ne pourrez plus réécouter les pistes."))return;stopAudio();save();reading()};
 }
 
@@ -204,7 +215,7 @@ function reading(){
 let h=`<div class="card"><h2>Part 2 – Reading</h2></div>`;
 T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=0;
 t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>qHTML(`R${i}_${n}`,++n,q)).join("")});h+="</div>"});
-app.innerHTML=h+`<button id="fin">Submit test</button>`;scrollTo(0,0);
+app.innerHTML=h+`<button type="button" id="fin">Submit test</button>`;scrollTo(0,0);
 document.querySelector("#fin").onclick=()=>{if(confirm("Submit the test?"))finish()};
 }
 
@@ -234,10 +245,10 @@ app.innerHTML=`<div class="card result-card">
 <p class="result-name">${esc(window.cand||"Candidat")}</p>
 <div class="lvl">${lvlLabel}</div>
 <p class="result-score">${window._finalScore}</p>
-<p class="note">Félicitations pour votre résultat ! Partagez votre score ou découvrez les cours adaptés à votre niveau.</p>
+<p class="note">Félicitations ! Vous avez complété le ${CFG.modes[MODE].label}.</p>
 <div class="res-actions">
-<button class="btn wa" id="shareBtn">📤 Partager mon score</button>
-<a class="btn" href="https://bbt-solution.com/cours-anglais-cotonou/">Voir les cours adaptés à mon niveau</a>
+<button type="button" id="shareBtn" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;border:2px solid #25D366;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(37,211,102,.35);text-decoration:none">📤 Partager mon résultat</button>
+<a href="https://bbt-solution.com/cours-anglais-cotonou/" style="display:inline-flex;align-items:center;gap:10px;background:#2235DD;color:#ffffff;border:2px solid #2235DD;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(34,53,221,.3);text-decoration:none">Voir les cours adaptés à mon niveau</a>
 </div>
 <canvas id="shareCanvas" style="display:none"></canvas>
 </div>`;
@@ -249,53 +260,29 @@ function generateShareImage(){
 return new Promise((resolve,reject)=>{
 const canvas=document.getElementById("shareCanvas");
 const ctx=canvas.getContext("2d");
-canvas.width=800;
-canvas.height=600;
-
+canvas.width=800;canvas.height=600;
 const logo=new Image();
 logo.crossOrigin="anonymous";
 logo.onload=function(){
 const grad=ctx.createLinearGradient(0,0,0,canvas.height);
-grad.addColorStop(0,"#f0f1fd");
-grad.addColorStop(1,"#e4e7fd");
-ctx.fillStyle=grad;
-ctx.fillRect(0,0,canvas.width,canvas.height);
-
-ctx.fillStyle="#2235DD";
-ctx.fillRect(0,0,canvas.width,8);
-ctx.fillRect(0,canvas.height-8,canvas.width,8);
-
-const logoW=220;
-const logoH=logo.height*(logoW/logo.width);
+grad.addColorStop(0,"#f0f1fd");grad.addColorStop(1,"#e4e7fd");
+ctx.fillStyle=grad;ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#2235DD";ctx.fillRect(0,0,canvas.width,8);ctx.fillRect(0,canvas.height-8,canvas.width,8);
+const logoW=220;const logoH=logo.height*(logoW/logo.width);
 ctx.drawImage(logo,(canvas.width-logoW)/2,40,logoW,logoH);
-
-ctx.fillStyle="#05060F";
-ctx.font="bold 30px Poppins, sans-serif";
-ctx.textAlign="center";
+ctx.fillStyle="#05060F";ctx.font="bold 30px Poppins, sans-serif";ctx.textAlign="center";
 ctx.fillText("Test de niveau d'anglais",canvas.width/2,170);
-
-ctx.fillStyle="#4a5568";
-ctx.font="18px Lato, sans-serif";
+ctx.fillStyle="#4a5568";ctx.font="18px Lato, sans-serif";
 ctx.fillText("BBT Solutions – Cotonou",canvas.width/2,205);
-
-ctx.fillStyle="#05060F";
-ctx.font="bold 24px Poppins, sans-serif";
+ctx.fillStyle="#05060F";ctx.font="bold 24px Poppins, sans-serif";
 ctx.fillText(window.cand||"Candidat",canvas.width/2,270);
-
-ctx.fillStyle="#2235DD";
-roundRect(ctx,canvas.width/2-110,300,220,80,18);
-ctx.fill();
-ctx.fillStyle="#ffffff";
-ctx.font="bold 44px Poppins, sans-serif";
+ctx.fillStyle="#2235DD";roundRect(ctx,canvas.width/2-110,300,220,80,18);ctx.fill();
+ctx.fillStyle="#ffffff";ctx.font="bold 44px Poppins, sans-serif";
 ctx.fillText(window._finalLevel||"–",canvas.width/2,355);
-
-ctx.fillStyle="#4a5568";
-ctx.font="20px Lato, sans-serif";
+ctx.fillStyle="#4a5568";ctx.font="20px Lato, sans-serif";
 ctx.fillText(window._finalScore||"",canvas.width/2,430);
-
 ctx.fillText("Test gratuit – Résultat immédiat",canvas.width/2,490);
 ctx.fillText("bbt-solution.com",canvas.width/2,525);
-
 resolve(canvas.toDataURL("image/png"));
 };
 logo.onerror=function(){reject(new Error("Logo load failed"))};
@@ -305,15 +292,10 @@ logo.src=CFG.logo;
 
 function roundRect(ctx,x,y,w,h,r){
 ctx.beginPath();
-ctx.moveTo(x+r,y);
-ctx.lineTo(x+w-r,y);
-ctx.quadraticCurveTo(x+w,y,x+w,y+r);
-ctx.lineTo(x+w,y+h-r);
-ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
-ctx.lineTo(x+r,y+h);
-ctx.quadraticCurveTo(x,y+h,x,y+h-r);
-ctx.lineTo(x,y+r);
-ctx.quadraticCurveTo(x,y,x+r,y);
+ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+ctx.lineTo(x+w,y+h-r);ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+ctx.lineTo(x+r,y+h);ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+ctx.lineTo(x,y+r);ctx.quadraticCurveTo(x,y,x+r,y);
 ctx.closePath();
 }
 
@@ -321,30 +303,23 @@ function shareResult(){
 generateShareImage().then(dataUrl=>{
 if(navigator.share&&navigator.canShare){
 fetch(dataUrl).then(r=>r.blob()).then(blob=>{
-const file=new File([blob],"mon-score-bbt-solutions.png",{type:"image/png"});
+const file=new File([blob],"mon-resultat-bbt-solutions.png",{type:"image/png"});
 if(navigator.canShare({files:[file]})){
 navigator.share({
-title:"Mon score au test d'anglais – BBT Solutions",
+title:"Mon résultat au test d'anglais – BBT Solutions",
 text:"Je viens de passer le test de niveau d'anglais gratuit de BBT Solutions à Cotonou. Mon résultat : "+(window._finalLevel||"")+" ! Découvre ton niveau : https://bbt-solution.com/test-niveau-anglais/",
 files:[file]
 }).catch(()=>{});
-}else{
-downloadImage(dataUrl);
-}
+}else{downloadImage(dataUrl);}
 }).catch(()=>downloadImage(dataUrl));
-}else{
-downloadImage(dataUrl);
-}
+}else{downloadImage(dataUrl);}
 }).catch(()=>{});
 }
 
 function downloadImage(dataUrl){
 const a=document.createElement("a");
-a.href=dataUrl;
-a.download="mon-score-bbt-solutions.png";
-document.body.appendChild(a);
-a.click();
-document.body.removeChild(a);
+a.href=dataUrl;a.download="mon-resultat-bbt-solutions.png";
+document.body.appendChild(a);a.click();document.body.removeChild(a);
 }
 
 intro();

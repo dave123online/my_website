@@ -1,5 +1,6 @@
 const CFG={title:"Test de niveau d'anglais – BBT Solutions",passTotal:19,levels:["A1","A2","B1","B2","C1"],
 audio:["https://bbt-solution.com/wp-content/uploads/2026/10/track1.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track2.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track3.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track4.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track5.mp3"],
+logo:"https://bbt-solution.com/wp-content/uploads/2026/02/zipwp-image-7039-250x66.jpeg",
 modes:{mini:{n:3,min:30,label:"Mini test – General English (Tests A–C, Tracks 1–3)"},full:{n:5,min:60,label:"Full test – TOEFL / exams (Tests A–E, Tracks 1–5)"}}};
 let N=3,MODE="mini";
 
@@ -175,7 +176,7 @@ function start(){tick=setInterval(()=>{left--;draw();if(left<=0)finish()},1000);
 
 function draw(){const m=Math.max(0,left);document.querySelector("#timer").textContent=String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
 
-function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" oncontextmenu="return false"></audio></div>`}
+function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" style="display:none"></audio></div>`}
 
 function bindAudio(){document.querySelectorAll(".aud").forEach(box=>{
 const a=box.querySelector("audio"),b=box.querySelector("button"),bar=box.querySelector("i"),st=box.querySelector(".st");let started=false,ended=false;
@@ -221,19 +222,129 @@ if(!res[i].ok){break;}
 lvl=i;
 }
 const lvlLabel=lvl<0?"Below "+CFG.levels[0]:CFG.levels[lvl];
-const waMsg="Bonjour, je viens de passer le test de niveau d'anglais gratuit sur bbt-solution.com ("+CFG.modes[MODE].label+"). Mon résultat : "+lvlLabel+". Je souhaite avoir plus d'informations pour m'inscrire.";
-const shareMsg="Je viens de passer le test de niveau d'anglais gratuit de BBT Solutions à Cotonou (A1→C1, résultat immédiat). Découvre ton niveau : https://bbt-solution.com/test-niveau-anglais/";
-app.innerHTML=`<div class="card"><h2>Result</h2><p>${esc(window.cand||"")} – ${CFG.modes[MODE].label}</p>
+window._finalLevel=lvlLabel;
+const totalScore=res.reduce((s,r)=>s+r.tot,0);
+const maxScore=res.length*24;
+const pct=Math.round(totalScore/maxScore*100);
+window._finalScore=totalScore+" / "+maxScore+" points ("+pct+"%)";
+
+app.innerHTML=`<div class="card result-card">
+<div class="result-logo"><img src="${CFG.logo}" alt="BBT Solutions"></div>
+<h2>Résultat du test</h2>
+<p class="result-name">${esc(window.cand||"Candidat")}</p>
 <div class="lvl">${lvlLabel}</div>
-<p class="note">Niveau = plus haut niveau validé consécutivement depuis le premier.</p>
-<table><tr><th>Level</th><th>Listening /4</th><th>Reading /20</th><th>Total /24</th><th></th></tr>`+
-res.map(r=>`<tr><td>${r.nm}</td><td>${r.ls}</td><td>${r.rs}</td><td>${r.tot}</td><td class="${r.ok?"ok":"ko"}">${r.ok?"Validated":"Not validated"}</td></tr>`).join("")+
-`</table><div class="res-actions">
-<a class="btn wa" target="_blank" rel="noopener" href="https://wa.me/2290197619263?text=${encodeURIComponent(waMsg)}">💬 Envoyer mon résultat sur WhatsApp</a>
+<p class="result-score">${window._finalScore}</p>
+<p class="note">Félicitations pour votre résultat ! Partagez votre score ou découvrez les cours adaptés à votre niveau.</p>
+<div class="res-actions">
+<button class="btn wa" id="shareBtn">📤 Partager mon score</button>
 <a class="btn" href="https://bbt-solution.com/cours-anglais-cotonou/">Voir les cours adaptés à mon niveau</a>
-<button onclick="print()" class="alt">Print / Save PDF</button>
-<a class="btn alt" target="_blank" rel="noopener" href="https://wa.me/?text=${encodeURIComponent(shareMsg)}">Partager le test</a></div></div>`;
+</div>
+<canvas id="shareCanvas" style="display:none"></canvas>
+</div>`;
 scrollTo(0,0);
+document.querySelector("#shareBtn").onclick=shareResult;
+}
+
+function generateShareImage(){
+return new Promise((resolve,reject)=>{
+const canvas=document.getElementById("shareCanvas");
+const ctx=canvas.getContext("2d");
+canvas.width=800;
+canvas.height=600;
+
+const logo=new Image();
+logo.crossOrigin="anonymous";
+logo.onload=function(){
+const grad=ctx.createLinearGradient(0,0,0,canvas.height);
+grad.addColorStop(0,"#f0f1fd");
+grad.addColorStop(1,"#e4e7fd");
+ctx.fillStyle=grad;
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#2235DD";
+ctx.fillRect(0,0,canvas.width,8);
+ctx.fillRect(0,canvas.height-8,canvas.width,8);
+
+const logoW=220;
+const logoH=logo.height*(logoW/logo.width);
+ctx.drawImage(logo,(canvas.width-logoW)/2,40,logoW,logoH);
+
+ctx.fillStyle="#05060F";
+ctx.font="bold 30px Poppins, sans-serif";
+ctx.textAlign="center";
+ctx.fillText("Test de niveau d'anglais",canvas.width/2,170);
+
+ctx.fillStyle="#4a5568";
+ctx.font="18px Lato, sans-serif";
+ctx.fillText("BBT Solutions – Cotonou",canvas.width/2,205);
+
+ctx.fillStyle="#05060F";
+ctx.font="bold 24px Poppins, sans-serif";
+ctx.fillText(window.cand||"Candidat",canvas.width/2,270);
+
+ctx.fillStyle="#2235DD";
+roundRect(ctx,canvas.width/2-110,300,220,80,18);
+ctx.fill();
+ctx.fillStyle="#ffffff";
+ctx.font="bold 44px Poppins, sans-serif";
+ctx.fillText(window._finalLevel||"–",canvas.width/2,355);
+
+ctx.fillStyle="#4a5568";
+ctx.font="20px Lato, sans-serif";
+ctx.fillText(window._finalScore||"",canvas.width/2,430);
+
+ctx.fillText("Test gratuit – Résultat immédiat",canvas.width/2,490);
+ctx.fillText("bbt-solution.com",canvas.width/2,525);
+
+resolve(canvas.toDataURL("image/png"));
+};
+logo.onerror=function(){reject(new Error("Logo load failed"))};
+logo.src=CFG.logo;
+});
+}
+
+function roundRect(ctx,x,y,w,h,r){
+ctx.beginPath();
+ctx.moveTo(x+r,y);
+ctx.lineTo(x+w-r,y);
+ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+ctx.lineTo(x+w,y+h-r);
+ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+ctx.lineTo(x+r,y+h);
+ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+ctx.lineTo(x,y+r);
+ctx.quadraticCurveTo(x,y,x+r,y);
+ctx.closePath();
+}
+
+function shareResult(){
+generateShareImage().then(dataUrl=>{
+if(navigator.share&&navigator.canShare){
+fetch(dataUrl).then(r=>r.blob()).then(blob=>{
+const file=new File([blob],"mon-score-bbt-solutions.png",{type:"image/png"});
+if(navigator.canShare({files:[file]})){
+navigator.share({
+title:"Mon score au test d'anglais – BBT Solutions",
+text:"Je viens de passer le test de niveau d'anglais gratuit de BBT Solutions à Cotonou. Mon résultat : "+(window._finalLevel||"")+" ! Découvre ton niveau : https://bbt-solution.com/test-niveau-anglais/",
+files:[file]
+}).catch(()=>{});
+}else{
+downloadImage(dataUrl);
+}
+}).catch(()=>downloadImage(dataUrl));
+}else{
+downloadImage(dataUrl);
+}
+}).catch(()=>{});
+}
+
+function downloadImage(dataUrl){
+const a=document.createElement("a");
+a.href=dataUrl;
+a.download="mon-score-bbt-solutions.png";
+document.body.appendChild(a);
+a.click();
+document.body.removeChild(a);
 }
 
 intro();

@@ -216,8 +216,8 @@ document.querySelector("#nx").onclick=()=>{if(!confirm("Passer au Reading ? Vous
 
 function reading(){
 let h=`<div class="card"><h2>Part 2 – Reading</h2></div>`;
-T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=-1;
-t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>qHTML(`R${i}_${++n}`,q)).join("")});h+="</div>"});
+T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=0;
+t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>{const idx=n++;return qHTML(`R${i}_${idx}`,idx+1,q);}).join("")});h+="</div>"});
 app.innerHTML=h+`<button type="button" id="fin">Submit test</button>`;scrollTo(0,0);
 document.querySelector("#fin").onclick=()=>{if(confirm("Submit the test?"))finish()};
 }

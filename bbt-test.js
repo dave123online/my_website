@@ -1,9 +1,18 @@
+Voici le fichier **`bbt-test.js` complet et à jour** (moteur + audio écoute unique + résultat score seul + partage image avec logo + envoi EmailJS avec tes identifiants). Remplace tout le contenu du fichier sur Netlify par ceci :
+
+```javascript
+/* =====================================================
+   BBT SOLUTIONS — TEST DE NIVEAU D'ANGLAIS
+   Fichier hébergé : https://digitalneighbor.netlify.app/bbt-test.js
+   Chargé par : https://bbt-solution.com/test-niveau-anglais/
+===================================================== */
 const CFG={title:"Test de niveau d'anglais – BBT Solutions",passTotal:19,levels:["A1","A2","B1","B2","C1"],
 audio:["https://bbt-solution.com/wp-content/uploads/2026/10/track1.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track2.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track3.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track4.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track5.mp3"],
 logo:"https://bbt-solution.com/wp-content/uploads/2026/02/zipwp-image-7039-250x66.jpeg",
 modes:{mini:{n:3,min:30,label:"Mini test – General English (Tests A–C, Tracks 1–3)"},full:{n:5,min:60,label:"Full test – TOEFL / exams (Tests A–E, Tracks 1–5)"}}};
 let N=3,MODE="mini";
 
+/* ============ DONNÉES LISTENING ============ */
 const L=[
 {key:"acbb",qs:["What did they do every evening?|They listened to the radio.|They went to the cinema.|They watched TV.","Why did he go to school by bicycle?|Because it was six miles away.|Because he didn't study very hard.|Because his parents didn't have a car.","Where did they play football?|At school|Beside the sea.|Near the cinema.","When did he leave Scotland?|When he left school.|When he was fifteen.|When he heard the sound of the sea."]},
 {key:"cbba",qs:["What kind of pizza does the customer order?|Perfect Pizza|Pizza to be delivered|Cheese Supreme","What size pizza does the customer order?|extra-large|large|regular","How much is the bottle of diet lemonade?|£11.85|£1.25|£12.60","How much does the customer pay altogether?|£11.85|£12.60|£10.60"]},
@@ -12,10 +21,12 @@ const L=[
 {key:"ccbc",qs:["Where is the woman?|She's in Room 603.|She's in the hotel manager's office.|She's at the hotel reception desk.","The receptionist asked the guest …|when she was going to pay the bill.|if she would be paying the bill by cheque.|how she would be paying the bill.","The guest told the receptionist …|her husband paid for her telephone calls.|she was not going to pay for her telephone call.|she did not use the telephone.","She said she …|wanted to speak to the manager at two thirty.|spent $120 on a phone call.|had spoken her husband for two minutes."]}
 ];
 
+/* ============ CLÉS READING ============ */
 const KEYA="bbcccbbaacccabcbcabac";
 const KEYB="abccbc bacbcabcb bcacb".replace(/ /g,"");
 const KEYC="bccbcaaabcbccccbabbb";
 
+/* ============ DONNÉES READING ============ */
 const T=[
 {key:KEYA,secs:[
 ["Read the text and choose the correct answer (5–8).",`Estelle Dupont was 100 years old in 2000. She was born near Bordeaux in France, where her father was a rich businessman. Today she lives in an old people's home in Paris.
@@ -154,6 +165,7 @@ Japanese scientists have also discovered that catfish become livelier several da
 `"I think the government has made a very wise decision." He ____ the government's decision.|criticised|accepted|applauded`]]]}
 ];
 
+/* ============ MOTEUR ============ */
 const app=document.querySelector("#app"),answers={},players=[];let left=0,tick,done=false;
 const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
@@ -173,7 +185,7 @@ document.querySelector("#go").onclick=()=>{const n=document.querySelector("#name
 function start(){tick=setInterval(()=>{left--;draw();if(left<=0)finish()},1000);draw();listening()}
 function draw(){const m=Math.max(0,left);document.querySelector("#timer").textContent=String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0")}
 
-function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" oncontextmenu="return false"></audio></div>`}
+function audioHTML(i){return `<div class="aud"><button type="button">▶ Écouter (une seule fois)</button><div class="bar"><i></i></div><span class="st">Prêt</span><audio preload="auto" src="${CFG.audio[i]}" oncontextmenu="return false" style="display:none"></audio></div>`}
 
 function bindAudio(){
 document.querySelectorAll(".aud").forEach(box=>{
@@ -181,8 +193,8 @@ const a=box.querySelector("audio"),b=box.querySelector("button"),bar=box.querySe
 let started=false;
 a.addEventListener("timeupdate",()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+"%"});
 a.addEventListener("pause",()=>{
-  // Anti-pause : on relance UNIQUEMENT si l'audio n'est pas encore terminé
-  // (le test a.currentTime < duration-0.5 empêche la reprise en double en fin de piste)
+  // Anti-pause : relance UNIQUEMENT si la piste n'est pas terminée
+  // (le test currentTime < duration-0.5 empêche le re-démarrage en fin de piste = bug "joue 2 fois")
   if(started && !a.ended && !box.dataset.stop && a.currentTime < a.duration-0.5){
     a.play().catch(()=>{});
   }
@@ -238,6 +250,9 @@ const totalScore=res.reduce((s,r)=>s+r.tot,0);
 const maxScore=res.length*24;
 const pct=Math.round(totalScore/maxScore*100);
 window._finalScore=totalScore+" / "+maxScore+" points ("+pct+"%)";
+window._resume=buildResume(res);
+window._details=buildDetails(res);
+envoyerResultatEmail();
 
 app.innerHTML=`<div class="card result-card">
 <div class="result-logo"><img src="${CFG.logo}" alt="BBT Solutions"></div>
@@ -246,6 +261,7 @@ app.innerHTML=`<div class="card result-card">
 <div class="lvl">${lvlLabel}</div>
 <p class="result-score">${window._finalScore}</p>
 <p class="note">Félicitations ! Vous avez complété le ${CFG.modes[MODE].label}.</p>
+<p class="result-note-email note"></p>
 <div class="res-actions">
 <button type="button" id="shareBtn" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;border:2px solid #25D366;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(37,211,102,.35);text-decoration:none">📤 Partager mon résultat</button>
 <a href="https://bbt-solution.com/cours-anglais-cotonou/" style="display:inline-flex;align-items:center;gap:10px;background:#2235DD;color:#ffffff;border:2px solid #2235DD;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(34,53,221,.3);text-decoration:none">Voir les cours adaptés à mon niveau</a>
@@ -256,6 +272,7 @@ scrollTo(0,0);
 document.querySelector("#shareBtn").onclick=shareResult;
 }
 
+/* ============ IMAGE DE PARTAGE (logo + score) ============ */
 function generateShareImage(){
 return new Promise((resolve,reject)=>{
 const canvas=document.getElementById("shareCanvas");
@@ -320,6 +337,77 @@ function downloadImage(dataUrl){
 const a=document.createElement("a");
 a.href=dataUrl;a.download="mon-resultat-bbt-solutions.png";
 document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+/* ============ ENVOI DU RÉSULTAT DÉTAILLÉ PAR EMAIL (EmailJS) ============ */
+var EMAILJS_SERVICE_ID  = "service_mmkr05k";
+var EMAILJS_TEMPLATE_ID = "template_si9f3hj";
+var EMAILJS_PUBLIC_KEY  = "_Wmyc3IfUVTXg4wnx";
+
+(function(){
+  var s=document.createElement("script");
+  s.src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js";
+  s.onload=function(){
+    if(window.emailjs){
+      emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+      if(window._pendingEmail){ window._pendingEmail=false; envoyerResultatEmail(); }
+    }
+  };
+  document.head.appendChild(s);
+})();
+
+function optxt(q,letter){var p=q.split("|");return letter+") "+p[{a:1,b:2,c:3}[letter]];}
+
+function buildResume(res){
+  return res.map(function(r){
+    return r.nm+" : "+r.tot+"/24 (Listening "+r.ls+"/4, Reading "+r.rs+"/20) "+(r.ok?"VALIDE":"NON VALIDE");
+  }).join("\n");
+}
+
+function buildDetails(res){
+  var out=[];
+  res.forEach(function(r,i){
+    out.push("=== NIVEAU "+r.nm+" ===");
+    out.push("-- LISTENING --");
+    L[i].qs.forEach(function(q,j){
+      var rep=answers["L"+i+"_"+j], bonne=L[i].key[j];
+      out.push("Q"+(j+1)+". "+q.split("|")[0]);
+      out.push("   Candidat : "+(rep?optxt(q,rep):"(aucune réponse)"));
+      out.push("   Attendu  : "+optxt(q,bonne)+(rep===bonne?"  [OK]":"  [FAUX]"));
+    });
+    out.push("-- READING --");
+    var idx=0;
+    T[i].secs.forEach(function(sec){
+      sec[2].forEach(function(q){
+        var rep=answers["R"+i+"_"+idx], bonne=T[i].key[idx];
+        out.push("Q"+(idx+1)+". "+q.split("|")[0]);
+        out.push("   Candidat : "+(rep?optxt(q,rep):"(aucune réponse)"));
+        out.push("   Attendu  : "+optxt(q,bonne)+(rep===bonne?"  [OK]":"  [FAUX]"));
+        idx++;
+      });
+    });
+  });
+  return out.join("\n");
+}
+
+function envoyerResultatEmail(){
+  if(!window.emailjs){ window._pendingEmail=true; return; }
+  emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+    name: window.cand||"Candidat",
+    date: new Date().toLocaleString("fr-FR"),
+    mode: CFG.modes[MODE].label,
+    level: window._finalLevel||"",
+    score: window._finalScore||"",
+    resume: window._resume||"",
+    details: window._details||""
+  }).then(function(){
+    var n=document.querySelector(".result-note-email");
+    if(n) n.textContent="✅ Résultat détaillé transmis à notre équipe.";
+  }).catch(function(err){
+    console.error("Erreur EmailJS :", err);
+    var n=document.querySelector(".result-note-email");
+    if(n) n.textContent="⚠️ Envoi impossible. Utilisez le bouton WhatsApp.";
+  });
 }
 
 intro();

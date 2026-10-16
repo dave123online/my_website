@@ -1,7 +1,6 @@
 /* =====================================================
    BBT SOLUTIONS — TEST DE NIVEAU D'ANGLAIS
    Fichier hébergé : https://digitalneighbor.netlify.app/bbt-test.js
-   Chargé par : https://bbt-solution.com/test-niveau-anglais/
 ===================================================== */
 const CFG={title:"Test de niveau d'anglais – BBT Solutions",passTotal:19,levels:["A1","A2","B1","B2","C1"],
 audio:["https://bbt-solution.com/wp-content/uploads/2026/10/track1.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track2.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track3.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track4.mp3","https://bbt-solution.com/wp-content/uploads/2026/10/track5.mp3"],
@@ -216,9 +215,20 @@ document.querySelector("#nx").onclick=()=>{if(!confirm("Passer au Reading ? Vous
 
 function reading(){
 let h=`<div class="card"><h2>Part 2 – Reading</h2></div>`;
-T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=0;
-t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>{const idx=n++;return qHTML(`R${i}_${idx}`,idx+1,q);}).join("")});h+="</div>"});
-app.innerHTML=h+`<button type="button" id="fin">Submit test</button>`;scrollTo(0,0);
+T.slice(0,N).forEach((t,i)=>{
+  h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;
+  let n=0;
+  t.secs.forEach(([ins,p,qs])=>{
+    h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"");
+    qs.forEach(q=>{
+      h+=qHTML(`R${i}_${n}`,n+1,q);
+      n++;
+    });
+  });
+  h+="</div>";
+});
+app.innerHTML=h+`<button type="button" id="fin">Submit test</button>`;
+scrollTo(0,0);
 document.querySelector("#fin").onclick=()=>{if(confirm("Submit the test?"))finish()};
 }
 
@@ -231,7 +241,6 @@ L[i].key.split("").forEach((k,j)=>{if(answers[`L${i}_${j}`]===k)ls++});
 T[i].key.split("").forEach((k,j)=>{if(answers[`R${i}_${j}`]===k)rs++});
 return{nm,ls,rs,tot:ls+rs,ok:ls+rs>=CFG.passTotal}});
 
-// NOUVELLE LOGIQUE : niveau final = plus haut niveau validé (peu importe l'ordre)
 let lvl=-1;
 for(let i=0;i<res.length;i++){
   if(res[i].ok){lvl=i;}

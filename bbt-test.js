@@ -1,6 +1,3 @@
-Voici le fichier **`bbt-test.js` complet et à jour** (moteur + audio écoute unique + résultat score seul + partage image avec logo + envoi EmailJS avec tes identifiants). Remplace tout le contenu du fichier sur Netlify par ceci :
-
-```javascript
 /* =====================================================
    BBT SOLUTIONS — TEST DE NIVEAU D'ANGLAIS
    Fichier hébergé : https://digitalneighbor.netlify.app/bbt-test.js

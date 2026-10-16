@@ -9,7 +9,6 @@ logo:"https://bbt-solution.com/wp-content/uploads/2026/02/zipwp-image-7039-250x6
 modes:{mini:{n:3,min:30,label:"Mini test – General English (Tests A–C, Tracks 1–3)"},full:{n:5,min:60,label:"Full test – TOEFL / exams (Tests A–E, Tracks 1–5)"}}};
 let N=3,MODE="mini";
 
-/* ============ DONNÉES LISTENING ============ */
 const L=[
 {key:"acbb",qs:["What did they do every evening?|They listened to the radio.|They went to the cinema.|They watched TV.","Why did he go to school by bicycle?|Because it was six miles away.|Because he didn't study very hard.|Because his parents didn't have a car.","Where did they play football?|At school|Beside the sea.|Near the cinema.","When did he leave Scotland?|When he left school.|When he was fifteen.|When he heard the sound of the sea."]},
 {key:"cbba",qs:["What kind of pizza does the customer order?|Perfect Pizza|Pizza to be delivered|Cheese Supreme","What size pizza does the customer order?|extra-large|large|regular","How much is the bottle of diet lemonade?|£11.85|£1.25|£12.60","How much does the customer pay altogether?|£11.85|£12.60|£10.60"]},
@@ -18,12 +17,10 @@ const L=[
 {key:"ccbc",qs:["Where is the woman?|She's in Room 603.|She's in the hotel manager's office.|She's at the hotel reception desk.","The receptionist asked the guest …|when she was going to pay the bill.|if she would be paying the bill by cheque.|how she would be paying the bill.","The guest told the receptionist …|her husband paid for her telephone calls.|she was not going to pay for her telephone call.|she did not use the telephone.","She said she …|wanted to speak to the manager at two thirty.|spent $120 on a phone call.|had spoken her husband for two minutes."]}
 ];
 
-/* ============ CLÉS READING ============ */
 const KEYA="bbcccbbaacccabcbcabac";
 const KEYB="abccbc bacbcabcb bcacb".replace(/ /g,"");
 const KEYC="bccbcaaabcbccccbabbb";
 
-/* ============ DONNÉES READING ============ */
 const T=[
 {key:KEYA,secs:[
 ["Read the text and choose the correct answer (5–8).",`Estelle Dupont was 100 years old in 2000. She was born near Bordeaux in France, where her father was a rich businessman. Today she lives in an old people's home in Paris.
@@ -162,7 +159,6 @@ Japanese scientists have also discovered that catfish become livelier several da
 `"I think the government has made a very wise decision." He ____ the government's decision.|criticised|accepted|applauded`]]]}
 ];
 
-/* ============ MOTEUR ============ */
 const app=document.querySelector("#app"),answers={},players=[];let left=0,tick,done=false;
 const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
 
@@ -190,8 +186,6 @@ const a=box.querySelector("audio"),b=box.querySelector("button"),bar=box.querySe
 let started=false;
 a.addEventListener("timeupdate",()=>{if(a.duration)bar.style.width=(a.currentTime/a.duration*100)+"%"});
 a.addEventListener("pause",()=>{
-  // Anti-pause : relance UNIQUEMENT si la piste n'est pas terminée
-  // (le test currentTime < duration-0.5 empêche le re-démarrage en fin de piste = bug "joue 2 fois")
   if(started && !a.ended && !box.dataset.stop && a.currentTime < a.duration-0.5){
     a.play().catch(()=>{});
   }
@@ -222,8 +216,8 @@ document.querySelector("#nx").onclick=()=>{if(!confirm("Passer au Reading ? Vous
 
 function reading(){
 let h=`<div class="card"><h2>Part 2 – Reading</h2></div>`;
-T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=0;
-t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>qHTML(`R${i}_${n}`,++n,q)).join("")});h+="</div>"});
+T.slice(0,N).forEach((t,i)=>{h+=`<div class="card"><h3>${CFG.levels[i]}</h3>`;let n=-1;
+t.secs.forEach(([ins,p,qs])=>{h+=`<p><b>${ins}</b></p>`+(p?`<div class="pass">${esc(p)}</div>`:"")+qs.map(q=>qHTML(`R${i}_${++n}`,q)).join("")});h+="</div>"});
 app.innerHTML=h+`<button type="button" id="fin">Submit test</button>`;scrollTo(0,0);
 document.querySelector("#fin").onclick=()=>{if(confirm("Submit the test?"))finish()};
 }
@@ -236,11 +230,13 @@ const res=CFG.levels.slice(0,N).map((nm,i)=>{let ls=0,rs=0;
 L[i].key.split("").forEach((k,j)=>{if(answers[`L${i}_${j}`]===k)ls++});
 T[i].key.split("").forEach((k,j)=>{if(answers[`R${i}_${j}`]===k)rs++});
 return{nm,ls,rs,tot:ls+rs,ok:ls+rs>=CFG.passTotal}});
+
+// NOUVELLE LOGIQUE : niveau final = plus haut niveau validé (peu importe l'ordre)
 let lvl=-1;
 for(let i=0;i<res.length;i++){
-if(!res[i].ok){break;}
-lvl=i;
+  if(res[i].ok){lvl=i;}
 }
+
 const lvlLabel=lvl<0?"Below "+CFG.levels[0]:CFG.levels[lvl];
 window._finalLevel=lvlLabel;
 const totalScore=res.reduce((s,r)=>s+r.tot,0);
@@ -269,7 +265,6 @@ scrollTo(0,0);
 document.querySelector("#shareBtn").onclick=shareResult;
 }
 
-/* ============ IMAGE DE PARTAGE (logo + score) ============ */
 function generateShareImage(){
 return new Promise((resolve,reject)=>{
 const canvas=document.getElementById("shareCanvas");
@@ -336,7 +331,6 @@ a.href=dataUrl;a.download="mon-resultat-bbt-solutions.png";
 document.body.appendChild(a);a.click();document.body.removeChild(a);
 }
 
-/* ============ ENVOI DU RÉSULTAT DÉTAILLÉ PAR EMAIL (EmailJS) ============ */
 var EMAILJS_SERVICE_ID  = "service_mmkr05k";
 var EMAILJS_TEMPLATE_ID = "template_si9f3hj";
 var EMAILJS_PUBLIC_KEY  = "_Wmyc3IfUVTXg4wnx";

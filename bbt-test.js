@@ -167,11 +167,22 @@ function intro(){
 app.innerHTML=`<div class="card"><h2>Votre profil</h2>
 <p class="note">Partie 1 : Listening (une piste par niveau, <b>écoute unique</b>). Partie 2 : Reading (20 questions par niveau). Une seule réponse par question. Un niveau est validé avec <b>${CFG.passTotal}/24</b>.</p>
 <div class="hp">🎧 <b>Écouteurs ou casque conseillés.</b> Les enregistrements ne seront diffusés qu'une seule fois, sans pause possible. Installez-vous dans un endroit calme avant de commencer.</div>
-<p><input type="text" id="name" placeholder="Full name"></p>
+<p><input type="text" id="name" placeholder="Nom complet" required></p>
+<p><input type="tel" id="phone" placeholder="Numéro WhatsApp (facultatif)"></p>
+<p class="note" style="font-size:13px;color:#4a5568;margin-top:-8px;">💬 Si vous le laissez, l'équipe BBT pourra vous contacter pour vous proposer le groupe adapté à votre niveau. C'est facultatif, vous pouvez passer le test sans le renseigner.</p>
 <p class="q"><label><input type="radio" name="mode" value="mini" checked> ${CFG.modes.mini.label} – ${CFG.modes.mini.min} min</label>
 <label><input type="radio" name="mode" value="full"> ${CFG.modes.full.label} – ${CFG.modes.full.min} min</label></p>
 <button type="button" id="go">Start</button></div>`;
-document.querySelector("#go").onclick=()=>{const n=document.querySelector("#name").value.trim();if(!n){document.querySelector("#name").focus();return}window.cand=n;MODE=document.querySelector("input[name=mode]:checked").value;N=CFG.modes[MODE].n;left=CFG.modes[MODE].min*60;start()};
+document.querySelector("#go").onclick=()=>{
+  const n=document.querySelector("#name").value.trim();
+  if(!n){document.querySelector("#name").focus();return}
+  window.cand=n;
+  window.phone=document.querySelector("#phone").value.trim();
+  MODE=document.querySelector("input[name=mode]:checked").value;
+  N=CFG.modes[MODE].n;
+  left=CFG.modes[MODE].min*60;
+  start();
+};
 }
 
 function start(){tick=setInterval(()=>{left--;draw();if(left<=0)finish()},1000);draw();listening()}
@@ -256,6 +267,8 @@ window._resume=buildResume(res);
 window._details=buildDetails(res);
 envoyerResultatEmail();
 
+const whatsappLink="https://wa.me/2290197619263?text="+encodeURIComponent("Bonjour, je viens de passer le test de niveau d'anglais sur bbt-solution.com. Mon résultat : "+lvlLabel+" ("+window._finalScore+"). Je souhaite en savoir plus sur les formations adaptées à mon niveau.");
+
 app.innerHTML=`<div class="card result-card">
 <div class="result-logo"><img src="${CFG.logo}" alt="BBT Solutions"></div>
 <h2>Résultat du test</h2>
@@ -265,8 +278,9 @@ app.innerHTML=`<div class="card result-card">
 <p class="note">Félicitations ! Vous avez complété le ${CFG.modes[MODE].label}.</p>
 <p class="result-note-email note"></p>
 <div class="res-actions">
-<button type="button" id="shareBtn" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;border:2px solid #25D366;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(37,211,102,.35);text-decoration:none">📤 Partager mon résultat</button>
-<a href="https://bbt-solution.com/cours-anglais-cotonou/" style="display:inline-flex;align-items:center;gap:10px;background:#2235DD;color:#ffffff;border:2px solid #2235DD;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(34,53,221,.3);text-decoration:none">Voir les cours adaptés à mon niveau</a>
+<a href="${whatsappLink}" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#ffffff;border:2px solid #25D366;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(37,211,102,.35);text-decoration:none">💬 Contacter BBT sur WhatsApp</a>
+<button type="button" id="shareBtn" style="display:inline-flex;align-items:center;gap:10px;background:#2235DD;color:#ffffff;border:2px solid #2235DD;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;box-shadow:0 4px 15px rgba(34,53,221,.3);text-decoration:none">📤 Partager mon score</button>
+<a href="https://bbt-solution.com/cours-anglais-cotonou/" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#2235DD;border:2px solid #2235DD;border-radius:50px;padding:14px 34px;font:700 1rem 'DM Sans',sans-serif;cursor:pointer;text-decoration:none">Voir les cours adaptés</a>
 </div>
 <canvas id="shareCanvas" style="display:none"></canvas>
 </div>`;
@@ -392,8 +406,10 @@ function buildDetails(res){
 
 function envoyerResultatEmail(){
   if(!window.emailjs){ window._pendingEmail=true; return; }
+  const phoneValue=window.phone?window.phone:"Le candidat n'a pas souhaité laisser son contact WhatsApp.";
   emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
     name: window.cand||"Candidat",
+    phone: phoneValue,
     date: new Date().toLocaleString("fr-FR"),
     mode: CFG.modes[MODE].label,
     level: window._finalLevel||"",
